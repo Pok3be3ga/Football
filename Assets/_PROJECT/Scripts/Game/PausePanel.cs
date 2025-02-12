@@ -4,16 +4,14 @@ using UnityEngine.UI;
 
 public class PausePanel : MonoBehaviour
 {
-    [SerializeField] private Button _restart;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Button _mainMenuButton;
     void Start()
     {
-        _restart.onClick.AddListener(RestartScene);
+        _mainMenuButton.onClick.AddListener(Menu);
     }
-    private void RestartScene()
+    private void Menu()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1.0f;
     }
 }

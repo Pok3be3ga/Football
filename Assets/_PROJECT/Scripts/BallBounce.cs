@@ -13,8 +13,17 @@ public class BallBounce : MonoBehaviour
     [SerializeField] private Transform _playerGate;
     [SerializeField] private AudioSource _ballAudio;
     [SerializeField] private AudioClip _ballAudioClip;
+    [SerializeField] private Transform _respawnBall;
 
+    [SerializeField] private float _randomPosition = 1f;
 
+    private void Update()
+    {
+        if(transform.position.y < 10)
+        {
+            RespawnBall();
+        }
+    }
     void Start()
     {
         Rigidbody.maxLinearVelocity = BallSpeed;
@@ -53,4 +62,12 @@ public class BallBounce : MonoBehaviour
             yield return null;
         }
     }
+
+
+    public void RespawnBall()
+    {
+        transform.position = _respawnBall.transform.position + 
+            new Vector3(Random.Range(-_randomPosition, _randomPosition), 0, Random.Range(-_randomPosition, _randomPosition));
+    }
+
 }
