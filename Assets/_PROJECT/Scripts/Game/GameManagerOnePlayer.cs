@@ -49,7 +49,6 @@ public class GameManagerOnePlayer : MonoBehaviour
     }
     private IEnumerator TimeScale()
     {
-        ActiveGates(false);
         while (Time.timeScale >= 0.5f)
         {
             Time.timeScale -= Time.deltaTime;
@@ -59,14 +58,6 @@ public class GameManagerOnePlayer : MonoBehaviour
         Time.timeScale = 1f;
         _startText.gameObject.SetActive(false);
         StartRound();
-        ActiveGates(true);
-    }
-    private void ActiveGates(bool active)
-    {
-        for (int i = 0; i < _gates.Length; i++)
-        {
-            _gates[i].enabled = active;
-        }
     }
     private void WinGame()
     {

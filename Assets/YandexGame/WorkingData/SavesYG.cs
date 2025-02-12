@@ -10,9 +10,16 @@ namespace YG
         public string language = "ru";
         public bool promptDone;
 
-        // Ваши сохранения
-        public int Money;
+        public enum LevelEnum
+        {
+            Easy,
+            Medium,
+            Hard
+        }
 
+        // Ваши сохранения
+        public int Money = 0;
+        public LevelEnum Level = LevelEnum.Easy;
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 

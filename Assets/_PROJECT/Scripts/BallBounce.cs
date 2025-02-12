@@ -4,7 +4,6 @@ using UnityEngine;
 public class BallBounce : MonoBehaviour
 {
     public float PushForce = 5f;
-
     public Rigidbody Rigidbody;
     [SerializeField] private float BallSpeed = 4f;
     [SerializeField] private float MaxSpeed = 10f;
@@ -16,6 +15,7 @@ public class BallBounce : MonoBehaviour
     [SerializeField] private Transform _respawnBall;
 
     [SerializeField] private float _randomPosition = 1f;
+    [SerializeField] private float _randomValue = 0f;
 
     private void Update()
     {
@@ -43,7 +43,10 @@ public class BallBounce : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyKick"))
         {
             ContactPoint contact = collision.contacts[0];
-            Vector3 pushDirection = _playerGate.position - transform.position;
+            Vector3 pushDirection = _playerGate.position + new Vector3(
+                Random.Range(0, _randomValue), 
+                Random.Range(0, _randomValue), 
+                Random.Range(0, _randomValue)) - transform.position;
             pushDirection.Normalize();
             StartCoroutine(UpSpeed());
             Rigidbody.AddForce(pushDirection * PushForce * 0.2f, ForceMode.Impulse);
