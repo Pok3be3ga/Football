@@ -23,6 +23,7 @@ public class PlayerKick : MonoBehaviour
     }
     IEnumerator Kick()
     {
+        _player.KickAnimation();
         _kickObject.SetActive(true);
         yield return new WaitForSeconds(_kickDuration);
         _kickObject.SetActive(false);

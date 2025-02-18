@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     public float rotationSpeed = 10.0f; // Rotation speed of the chaser
     public float JumpForce = 5.0f;
 
+    [SerializeField] private Animator _animator;
     private Rigidbody _rigidbody;
     private float _timerJump;
 
@@ -18,7 +19,8 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.LogError("Rigidbody component not found on this GameObject.");
         }
-        StartCoroutine(JumpCorutine());
+        //StartCoroutine(JumpCorutine());
+        _animator.SetBool("Idle", false);
     }
     private void Update()
     {
@@ -40,9 +42,9 @@ public class EnemyMovement : MonoBehaviour
             _timerJump = 0f;
             if (_timerJump > 1f)
             {
-                StopAllCoroutines();
+                //StopAllCoroutines();
                 Jump();
-                StartCoroutine(JumpCorutine());
+                //StartCoroutine(JumpCorutine());
             }
         }
     }
@@ -50,8 +52,6 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         Vector3 moveDirection = new Vector3(directionToTarget.x, 0, directionToTarget.z);
-
-        // Move towards the target
         _rigidbody.MovePosition(transform.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 

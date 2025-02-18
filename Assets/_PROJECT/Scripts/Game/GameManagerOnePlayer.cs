@@ -22,7 +22,7 @@ public class GameManagerOnePlayer : MonoBehaviour
 
     private int _playerPoint;
     private int _enemyPoint;
-    private void Start()
+    private void Awake()
     {
         StartRound();
     }
@@ -31,8 +31,11 @@ public class GameManagerOnePlayer : MonoBehaviour
     {
         _ball.RespawnBall();
         _ball.Rigidbody.linearVelocity = Vector3.down;
-        _enemy.transform.position = _enemyRespawn.transform.position;
-        _player.transform.position = _playerRespawn.transform.position;
+        _enemy.transform.position = _enemyRespawn.position;
+        _enemy.transform.rotation = _enemyRespawn.rotation;
+
+        _player.transform.position = _playerRespawn.position;
+        _player.transform.rotation = _playerRespawn.rotation;
     }
     public void Goal(bool _playerGate)
     {
