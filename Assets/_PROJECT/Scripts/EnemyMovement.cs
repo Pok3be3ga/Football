@@ -10,16 +10,22 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private Animator _animator;
     private Rigidbody _rigidbody;
-    private float _timerJump;
+    [SerializeField] private float _timerJump = 0f;
 
+    private void OnEnable()
+    {
+        if (_rigidbody != null)
+            _rigidbody.linearVelocity = Vector3.zero;
+    }
     void Start()
     {
+
         _rigidbody = GetComponent<Rigidbody>();
         if (_rigidbody == null)
         {
             Debug.LogError("Rigidbody component not found on this GameObject.");
         }
-        //StartCoroutine(JumpCorutine());
+        _rigidbody.maxLinearVelocity = 8f;
         _animator.SetBool("Idle", false);
     }
     private void Update()
@@ -39,19 +45,23 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enviroment"))
         {
-            _timerJump = 0f;
             if (_timerJump > 1f)
             {
-                //StopAllCoroutines();
                 Jump();
-                //StartCoroutine(JumpCorutine());
+                _timerJump = 0f;
             }
         }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground")) _rigidbody.linearVelocity = Vector3.zero;
     }
     private void ChaseTarget()
     {
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         Vector3 moveDirection = new Vector3(directionToTarget.x, 0, directionToTarget.z);
+
+        //_rigidbody.AddForce(moveDirection * moveSpeed, ForceMode.VelocityChange);
         _rigidbody.MovePosition(transform.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 
@@ -66,13 +76,6 @@ public class EnemyMovement : MonoBehaviour
             Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
             _rigidbody.MoveRotation(newRotation);
         }
-    }
-    IEnumerator JumpCorutine()
-    {
-        float random = Random.Range(1, 6);
-        yield return new WaitForSeconds(random);
-        Jump();
-        StartCoroutine(JumpCorutine());
     }
     private void Jump()
     {

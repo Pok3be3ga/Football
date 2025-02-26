@@ -31,8 +31,11 @@ public class GameManagerOnePlayer : MonoBehaviour
     {
         _ball.RespawnBall();
         _ball.Rigidbody.linearVelocity = Vector3.down;
+
+        _enemy.enabled = false;
         _enemy.transform.position = _enemyRespawn.position;
         _enemy.transform.rotation = _enemyRespawn.rotation;
+        _enemy.enabled = true;
 
         _player.transform.position = _playerRespawn.position;
         _player.transform.rotation = _playerRespawn.rotation;
@@ -55,12 +58,12 @@ public class GameManagerOnePlayer : MonoBehaviour
         while (Time.timeScale >= 0.5f)
         {
             Time.timeScale -= Time.deltaTime;
-            yield return null;
         }
        yield return new WaitForSeconds(1);
         Time.timeScale = 1f;
         _startText.gameObject.SetActive(false);
         StartRound();
+        yield return null;
     }
     private void WinGame()
     {

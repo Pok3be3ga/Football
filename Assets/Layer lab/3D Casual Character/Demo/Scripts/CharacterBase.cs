@@ -77,7 +77,7 @@ namespace Layer_lab._3D_Casual_Character
             SetItem(PartsType.Shoes, Random.Range(0, PartsShoes.Count - 1));
             SetItem(PartsType.Glove, Random.Range(-5, PartsGlove.Count - 1));
         }
-        
+        [ContextMenu("SetRoot")]
         protected void SetRoot()
         {
             PartsHair.Clear();

@@ -1,7 +1,21 @@
 {
-    "idSave": 1,
+    "idSave": 72,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "Money": 100
+    "Money": 100,
+    "Level": 0,
+    "CharacterPartsFirst": [
+        0,
+        2,
+        6,
+        53,
+        5,
+        36,
+        16,
+        10,
+        31,
+        15
+    ],
+    "CharacterPartsSecond": []
 }

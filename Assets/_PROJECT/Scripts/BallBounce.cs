@@ -36,6 +36,8 @@ public class BallBounce : MonoBehaviour
             ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = contact.point - transform.position;
             pushDirection.Normalize();
+            StopAllCoroutines();
+            Rigidbody.maxLinearVelocity = BallSpeed;
             StartCoroutine(UpSpeed());
             Rigidbody.AddForce(pushDirection * PushForce, ForceMode.Impulse);
         }
@@ -48,6 +50,8 @@ public class BallBounce : MonoBehaviour
                 Random.Range(0, _randomValue), 
                 Random.Range(0, _randomValue)) - transform.position;
             pushDirection.Normalize();
+            StopAllCoroutines();
+            Rigidbody.maxLinearVelocity = BallSpeed;
             StartCoroutine(UpSpeed());
             Rigidbody.AddForce(pushDirection * PushForce * 0.2f, ForceMode.Impulse);
         }

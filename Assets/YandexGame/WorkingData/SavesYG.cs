@@ -20,6 +20,8 @@ namespace YG
         // Ваши сохранения
         public int Money = 0;
         public LevelEnum Level = LevelEnum.Easy;
+        public int[] CharacterPartsFirst;
+        public int[] CharacterPartsSecond;
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 

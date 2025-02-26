@@ -5,6 +5,7 @@ namespace Layer_lab._3D_Casual_Character
 {
     public class ViewModel : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
+        [SerializeField] private CharacterControl _characterControl;
         [SerializeField] private float rotationSpeed = 0.18f;
         private bool _isDragging;
         private Vector2 _startDragPos;
@@ -23,7 +24,7 @@ namespace Layer_lab._3D_Casual_Character
                 Vector2 dragDelta = currentDragPos - _startDragPos;
 
                 float rotationX = dragDelta.x * rotationSpeed;
-                CharacterControl.Instance.CharacterBase.transform.Rotate(Vector3.up, -rotationX, Space.World);
+                _characterControl.CharacterBase.transform.Rotate(Vector3.up, -rotationX, Space.World);
 
                 _startDragPos = currentDragPos;
             }

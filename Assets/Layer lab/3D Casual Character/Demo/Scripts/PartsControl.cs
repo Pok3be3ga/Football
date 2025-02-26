@@ -5,22 +5,23 @@ namespace Layer_lab._3D_Casual_Character
 {
     public class PartsControl : MonoBehaviour
     {
+        [SerializeField] private CharacterControl _characterControl;
         [SerializeField] private ButtonParts button;
         [SerializeField] private Transform content;
         [SerializeField] private Sprite[] spriteIcons;
-        private List<ButtonParts> _buttonParts = new();
+        [SerializeField] private List<ButtonParts> _buttonParts = new();
 
         private void Start()
         {
-            SpawnPartsButton(PartsType.Hair,CharacterControl.Instance.CharacterBase.PartsHair.ToArray(), $"{PartsType.Hair}", false);
-            SpawnPartsButton(PartsType.Face,CharacterControl.Instance.CharacterBase.PartsFace.ToArray(), $"{PartsType.Face}", false);
-            SpawnPartsButton(PartsType.Headgear,CharacterControl.Instance.CharacterBase.PartsHeadGear.ToArray(), $"{PartsType.Headgear}", true);
-            SpawnPartsButton(PartsType.Top,CharacterControl.Instance.CharacterBase.PartsTop.ToArray(), $"{PartsType.Top}", false);
-            SpawnPartsButton(PartsType.Glove,CharacterControl.Instance.CharacterBase.PartsGlove.ToArray(), $"{PartsType.Glove}", true);
-            SpawnPartsButton(PartsType.Bottom,CharacterControl.Instance.CharacterBase.PartsBottom.ToArray(), $"{PartsType.Bottom}", false);
-            SpawnPartsButton(PartsType.Shoes,CharacterControl.Instance.CharacterBase.PartsShoes.ToArray(), $"{PartsType.Shoes}", false);
-            SpawnPartsButton(PartsType.Bag,CharacterControl.Instance.CharacterBase.PartsBag.ToArray(), $"{PartsType.Bag}", true);
-            SpawnPartsButton(PartsType.Eyewear,CharacterControl.Instance.CharacterBase.PartsEyewear.ToArray(), $"{PartsType.Eyewear}", true);
+            SpawnPartsButton(PartsType.Hair,_characterControl.CharacterBase.PartsHair.ToArray(), $"{PartsType.Hair}", false);
+            SpawnPartsButton(PartsType.Face,_characterControl.CharacterBase.PartsFace.ToArray(), $"{PartsType.Face}", false);
+            SpawnPartsButton(PartsType.Headgear,_characterControl.CharacterBase.PartsHeadGear.ToArray(), $"{PartsType.Headgear}", true);
+            SpawnPartsButton(PartsType.Top,_characterControl.CharacterBase.PartsTop.ToArray(), $"{PartsType.Top}", false);
+            SpawnPartsButton(PartsType.Glove,_characterControl.CharacterBase.PartsGlove.ToArray(), $"{PartsType.Glove}", true);
+            SpawnPartsButton(PartsType.Bottom,_characterControl.CharacterBase.PartsBottom.ToArray(), $"{PartsType.Bottom}", false);
+            SpawnPartsButton(PartsType.Shoes,_characterControl.CharacterBase.PartsShoes.ToArray(), $"{PartsType.Shoes}", false);
+            SpawnPartsButton(PartsType.Bag,_characterControl.CharacterBase.PartsBag.ToArray(), $"{PartsType.Bag}", true);
+            SpawnPartsButton(PartsType.Eyewear,_characterControl.CharacterBase.PartsEyewear.ToArray(), $"{PartsType.Eyewear}", true);
             button.gameObject.SetActive(false);
         }
 

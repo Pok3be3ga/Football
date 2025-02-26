@@ -6,13 +6,13 @@ namespace Layer_lab._3D_Casual_Character
 {
     public class CharacterControl : MonoBehaviour
     {
-        public static CharacterControl Instance;
+        //public static CharacterControl Instance;
         public CharacterBase CharacterBase { get; set; }
         private Animator animator; 
         private Coroutine _coroutine;
         void Awake()
         {
-            Instance = this;
+            //Instance = this;
             animator = GetComponentInChildren<Animator>();
             CharacterBase = GetComponentInChildren<CharacterBase>();
         }
