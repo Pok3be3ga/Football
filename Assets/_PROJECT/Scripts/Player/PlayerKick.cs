@@ -16,7 +16,7 @@ public class PlayerKick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(_player.KickKey) && _kickObject.active == false)
+        if (Input.GetKeyDown(_player.KickKey) && _kickObject.activeSelf == false)
         {
             StartCoroutine(Kick());
         }

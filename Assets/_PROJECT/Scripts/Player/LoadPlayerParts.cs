@@ -1,30 +1,30 @@
 using Layer_lab._3D_Casual_Character;
 using UnityEngine;
-using YG;
-
 public class LoadPlayerParts : MonoBehaviour
 {
+    [SerializeField] private GameSettings _gameSettings;
     [SerializeField] private CharacterControl CharacterControl;
     [SerializeField] private bool _secondPlayer;
-    public int[] SaveGloves = new int[10];
+    private int[] _saveGloves = new int[10];
+    private GameObject[] _playerModels;
     private void Start()
     {
-        LoadBuysFromJSON();
+        LoadGloves();
     }
-    public void LoadBuysFromJSON()
+    public void LoadGloves()
     {
-        YandexGame.LoadProgress();
-        if(_secondPlayer == true) SaveGloves = YandexGame.savesData.CharacterPartsSecond;
-        else SaveGloves = YandexGame.savesData.CharacterPartsFirst;
-        //CharacterControl.Instance.CharacterBase.SetItem(PartsType.Body, SaveGloves[0]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Hair, SaveGloves[1]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Face, SaveGloves[2]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Headgear, SaveGloves[3]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Top, SaveGloves[4]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Bottom, SaveGloves[5]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Eyewear, SaveGloves[6]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Bag, SaveGloves[7]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Shoes, SaveGloves[8]);
-        CharacterControl.CharacterBase.SetItem(PartsType.Glove, SaveGloves[9]);
+        if (_secondPlayer) _saveGloves = _gameSettings.SaveGlovesSecondPlayer;
+        else _saveGloves = _gameSettings.SaveGlovesFirstPlayer;
+        
+        CharacterControl.CharacterBase.SetItem(PartsType.Hair, _saveGloves[1]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Face, _saveGloves[2]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Headgear, _saveGloves[3]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Top, _saveGloves[4]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Bottom, _saveGloves[5]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Eyewear, _saveGloves[6]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Bag, _saveGloves[7]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Shoes, _saveGloves[8]);
+        CharacterControl.CharacterBase.SetItem(PartsType.Glove, _saveGloves[9]);
+        CharacterControl.CharacterBase.SetRoot();
     }
 }

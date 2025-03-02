@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float acceleration = 10.0f; // ��������� ���������
+    public float acceleration = 10.0f;
     [SerializeField] private float maxSpeed = 5;
-    [SerializeField] private float Speed = 5.0f;
     [SerializeField] private float RotationSpeed = 10f;
     [SerializeField] private float JumpForce = 5.0f;
     [SerializeField] private float _friction;
@@ -15,13 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode moveLeftKey = KeyCode.A;
     public KeyCode moveRightKey = KeyCode.D;
     public KeyCode jumpKey = KeyCode.Space;
-
-    //public KeyCode JumpKey = KeyCode.Space;
     public KeyCode KickKey = KeyCode.LeftShift;
-    //public KeyCode UpKey = KeyCode.W;
-    //public KeyCode DownKey = KeyCode.S;
-    //public KeyCode LeftKey = KeyCode.A;
-    //public KeyCode RightKey = KeyCode.D;
+
     private Vector3 _movementInput;
     private Vector3 _currentVelocity;
 
@@ -36,35 +30,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //Vector3 movement = Vector3.zero;
         HandleMovement();
         ApplyGravity();
-        //if (Input.GetKey(RightKey)) movement += Vector3.Lerp(Vector3.zero, Vector3.right, Time.deltaTime);
-        //if (Input.GetKey(LeftKey)) movement += Vector3.Lerp(Vector3.zero, Vector3.left, Time.deltaTime);
-        //if (Input.GetKey(UpKey)) movement += Vector3.Lerp(Vector3.zero, Vector3.forward, Time.deltaTime);
-        //if (Input.GetKey(DownKey)) movement += Vector3.Lerp(Vector3.zero, Vector3.back, Time.deltaTime);
-
-        //if (Input.GetKey(RightKey)) movement += Vector3.right;
-        //if (Input.GetKey(LeftKey)) movement += Vector3.left;
-        //if (Input.GetKey(UpKey)) movement += Vector3.forward;
-        //if (Input.GetKey(DownKey)) movement += Vector3.back;
-        //_rigidbody.MovePosition(transform.position + movement * Speed);
-
-        //_rigidbody.AddForce(movement * Speed, ForceMode.VelocityChange);
-        //if (!_isGrounded) _rigidbody.AddForce(Vector3.down * _maxSpeed);
-        //_rigidbody.AddForce(new Vector3(-movement.x, 0f, -movement.z) * _friction, ForceMode.VelocityChange);
-
-
-
-        //if (movement != Vector3.zero)
-        //{
-        //    _animator.SetBool("Idle", false);
-
-        //}
-        //else
-        //{
-        //    _animator.SetBool("Idle", true);
-        //}
     }
     private void ApplyGravity()
     {
@@ -75,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        // Check for jump input
         if (Input.GetKeyDown(jumpKey) && _isGrounded)
         {
             Jump();
@@ -124,15 +90,6 @@ public class PlayerMovement : MonoBehaviour
                 _isGrounded = true;
             }
         }
-        //foreach (ContactPoint contact in collision.contacts)
-        //{
-        //    if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f) //&& collision.gameObject.CompareTag("Ground"))
-        //    {
-        //        _isGrounded = true;
-        //        return;
-        //    }
-        //}
-        //_isGrounded = false;
     }
 
     private void OnCollisionExit(Collision collision)

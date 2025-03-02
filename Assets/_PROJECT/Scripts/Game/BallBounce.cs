@@ -26,7 +26,7 @@ public class BallBounce : MonoBehaviour
     }
     void Start()
     {
-        Rigidbody.maxLinearVelocity = BallSpeed;
+        //Rigidbody.maxLinearVelocity = BallSpeed;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -37,9 +37,9 @@ public class BallBounce : MonoBehaviour
             Vector3 pushDirection = contact.point - transform.position;
             pushDirection.Normalize();
             StopAllCoroutines();
-            Rigidbody.maxLinearVelocity = BallSpeed;
-            StartCoroutine(UpSpeed());
-            Rigidbody.AddForce(pushDirection * PushForce, ForceMode.Impulse);
+            //Rigidbody.maxLinearVelocity = BallSpeed;
+            //StartCoroutine(UpSpeed());
+            Rigidbody.AddForce(pushDirection * PushForce, ForceMode.VelocityChange);
         }
 
         if (collision.gameObject.CompareTag("EnemyKick"))
@@ -51,9 +51,17 @@ public class BallBounce : MonoBehaviour
                 Random.Range(0, _randomValue)) - transform.position;
             pushDirection.Normalize();
             StopAllCoroutines();
-            Rigidbody.maxLinearVelocity = BallSpeed;
-            StartCoroutine(UpSpeed());
-            Rigidbody.AddForce(pushDirection * PushForce * 0.2f, ForceMode.Impulse);
+            //Rigidbody.maxLinearVelocity = BallSpeed;
+            //StartCoroutine(UpSpeed());
+            Rigidbody.AddForce(pushDirection * PushForce * 0.2f, ForceMode.VelocityChange);
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ContactPoint contact = collision.contacts[0];
+            Vector3 pushDirection = contact.point - transform.position;
+            pushDirection.Normalize();
+            Rigidbody.AddForce(pushDirection * PushForce/3f, ForceMode.VelocityChange);
+
         }
     }
     IEnumerator UpSpeed()

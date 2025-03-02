@@ -45,7 +45,7 @@ namespace Layer_lab._3D_Casual_Character
         public void SavePrefab()
         {
             #if UNITY_EDITOR
-            string localPath = "Assets/Layer lab/3D Props Casual Character Pack1/Prefabs/"+ gameObject.name +".prefab";
+            string localPath = "Assets/"+ gameObject.name +".prefab";
             bool isPrefabSuccess;
 
             GameObject instanceObject = Instantiate(gameObject);
@@ -77,8 +77,7 @@ namespace Layer_lab._3D_Casual_Character
             SetItem(PartsType.Shoes, Random.Range(0, PartsShoes.Count - 1));
             SetItem(PartsType.Glove, Random.Range(-5, PartsGlove.Count - 1));
         }
-        [ContextMenu("SetRoot")]
-        protected void SetRoot()
+        public void SetRoot()
         {
             PartsHair.Clear();
             PartsFace.Clear();

@@ -6,11 +6,12 @@ using YG;
 
 public class GameManagerOnePlayer : MonoBehaviour
 {
+    [SerializeField] private GameSettings _gameSettings;
     [SerializeField] private TextMeshProUGUI _startText;
     [SerializeField] private TextMeshProUGUI _pointText;
     [SerializeField] private BallBounce _ball;
 
-    [SerializeField] private PlayerMovement _player;
+    [SerializeField] private PlayerMovement[] _players;
     [SerializeField] private EnemyMovement _enemy;
 
     [SerializeField] private Transform _playerRespawn;
@@ -19,26 +20,46 @@ public class GameManagerOnePlayer : MonoBehaviour
     [SerializeField] private Image _pausePanel;
     [SerializeField] private TriggerGate[] _gates;
 
+    private bool _twoPlayer;
+
 
     private int _playerPoint;
     private int _enemyPoint;
     private void Awake()
     {
+        _twoPlayer = _gameSettings.TwoPlayer;
+        if (_twoPlayer)
+        {
+            _enemy.gameObject.SetActive(false);
+            _players[1].gameObject.SetActive(true);
+        }
+        else
+        {
+            _enemy.gameObject.SetActive(true);
+            _players[1].gameObject.SetActive(false);
+        }
         StartRound();
     }
 
-    private void StartRound()
+    public void StartRound()
     {
         _ball.RespawnBall();
         _ball.Rigidbody.linearVelocity = Vector3.down;
 
-        _enemy.enabled = false;
-        _enemy.transform.position = _enemyRespawn.position;
-        _enemy.transform.rotation = _enemyRespawn.rotation;
-        _enemy.enabled = true;
-
-        _player.transform.position = _playerRespawn.position;
-        _player.transform.rotation = _playerRespawn.rotation;
+        if (_twoPlayer)
+        {
+            _players[1].transform.position = _enemyRespawn.position;
+            _players[1].transform.rotation = _enemyRespawn.rotation;
+        }
+        else
+        {
+            _enemy.enabled = false;
+            _enemy.transform.position = _enemyRespawn.position;
+            _enemy.transform.rotation = _enemyRespawn.rotation;
+            _enemy.enabled = true;
+        }
+        _players[0].transform.position = _playerRespawn.position;
+        _players[0].transform.rotation = _playerRespawn.rotation;
     }
     public void Goal(bool _playerGate)
     {
@@ -82,7 +103,7 @@ public class GameManagerOnePlayer : MonoBehaviour
     [ContextMenu("AddMoney")]
     private void AddMoney()
     {
-        if (_playerPoint == 5)
+        if (_playerPoint == 5 && _twoPlayer == false)
         {
             YandexGame.savesData.Money += 100;
             YandexGame.SaveProgress();
