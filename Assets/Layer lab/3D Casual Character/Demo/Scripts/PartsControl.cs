@@ -9,7 +9,7 @@ namespace Layer_lab._3D_Casual_Character
         [SerializeField] private ButtonParts button;
         [SerializeField] private Transform content;
         [SerializeField] private Sprite[] spriteIcons;
-        [SerializeField] private List<ButtonParts> _buttonParts = new();
+        public List<ButtonParts> ButtonParts = new();
 
         private void Start()
         {
@@ -43,14 +43,14 @@ namespace Layer_lab._3D_Casual_Character
         {
             ButtonParts buttonParts = Instantiate(button, content, false);
             buttonParts.SetButton(partsType, parts, GetSprite(name.ToLower()), isEmpty);
-            _buttonParts.Add(buttonParts);
+            ButtonParts.Add(buttonParts);
         }
 
         public void SetAllRandom()
         {
-            for (int i = 0; i < _buttonParts.Count; i++)
+            for (int i = 0; i < ButtonParts.Count; i++)
             {
-                _buttonParts[i].SetRandom();   
+                ButtonParts[i].SetRandom();   
             }
         }
     }

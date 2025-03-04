@@ -8,7 +8,7 @@ namespace Layer_lab._3D_Casual_Character
     {
         [SerializeField] private CharacterControl _characterControl;
         private GameObject[] _parts;
-        private int _index;
+        public int Index { get; private set; }
         [SerializeField] private TMP_Text textTitle;
         [field: SerializeField] private bool IsEmpty { get; set; }
 
@@ -30,7 +30,7 @@ namespace Layer_lab._3D_Casual_Character
             if (IsEmpty)
             {
                 _characterControl.CharacterBase.SetItem(CurrentPartType, -1);
-                _index = -1;
+                Index = -1;
             }
             else
             {
@@ -45,15 +45,15 @@ namespace Layer_lab._3D_Casual_Character
 
         public void OnClick_Next()
         {
-            _index++;
+            Index++;
         
             if (IsEmpty)
             {
-                if (_index >= _parts.Length) _index = -1;
+                if (Index >= _parts.Length) Index = -1;
             }
             else
             {
-                if (_index >= _parts.Length) _index = 0;
+                if (Index >= _parts.Length) Index = 0;
             }
         
             _SetParts();
@@ -62,15 +62,15 @@ namespace Layer_lab._3D_Casual_Character
 
         public void OnClick_Previous()
         {
-            _index--;
+            Index--;
 
             if (IsEmpty)
             {
-                if (_index < -1) _index = _parts.Length - 1;
+                if (Index < -1) Index = _parts.Length - 1;
             }
             else
             {
-                if (_index < 0) _index = _parts.Length - 1;   
+                if (Index < 0) Index = _parts.Length - 1;   
             }
 
             _SetParts();
@@ -80,20 +80,20 @@ namespace Layer_lab._3D_Casual_Character
 
         private void _SetParts()
         {
-            _characterControl.CharacterBase.SetItem(CurrentPartType, _index);
+            _characterControl.CharacterBase.SetItem(CurrentPartType, Index);
         }
     
 
         private void _SetTitle()
         {
-            if (!IsEmpty && _index <= -1 || IsEmpty && _index <= -1)
+            if (!IsEmpty && Index <= -1 || IsEmpty && Index <= -1)
             {
                 textTitle.text = "--";
                 textTitle.CrossFadeAlpha(0.3f, 0f, true);
             }
             else
             {
-                string result = _parts[_index].name.Replace("Pack1_", "");
+                string result = _parts[Index].name.Replace("Pack1_", "");
                 result = result.Replace("_", "");
                 textTitle.text = result;
                 textTitle.CrossFadeAlpha(1f, 0f, true);
@@ -114,7 +114,7 @@ namespace Layer_lab._3D_Casual_Character
                 random = Random.Range(0, _parts.Length - 1);
             }
             
-            _index = random;
+            Index = random;
             _characterControl.CharacterBase.SetItem(CurrentPartType, random);
             _SetTitle();
         }
