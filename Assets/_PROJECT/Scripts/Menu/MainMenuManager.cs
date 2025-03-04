@@ -18,11 +18,14 @@ public class MainMenuManager : MonoBehaviour
     [Space]
     [Space]
     [Space]
+    [Space]
+    [Space,]
     [SerializeField] private Button _startButton;
     [SerializeField] private Toggle _secondPlayerToggle;
     [SerializeField] private GameObject[] _levelEnviroments;
     [SerializeField] private Button[] _levelChoseButtons;
     [SerializeField] private GameObject[] _secondPlayerObjectsActive;
+    [SerializeField] private TMP_Dropdown _levelSettingsDropDown;
 
     private int _currentLevel;
     private void OnEnable()
@@ -84,6 +87,7 @@ public class MainMenuManager : MonoBehaviour
     }
     private void AddSecondPlayerClick(bool toggleValue)
     {
+        _levelSettingsDropDown.gameObject.SetActive(!toggleValue);
         for (int i = 0; i < _secondPlayerObjectsActive.Length; i++)
         {
             _secondPlayerObjectsActive[i].SetActive(toggleValue);
@@ -98,6 +102,12 @@ public class MainMenuManager : MonoBehaviour
             _gameSettings.SaveGlovesSecondPlayer[i] = _partsControlSecondPlayer.ButtonParts[i].Index;
         }
         _gameSettings.TwoPlayer = _secondPlayerToggle.isOn;
+        if (_levelSettingsDropDown.gameObject.activeSelf == true)
+        {
+            int index = _levelSettingsDropDown.value;
+            _gameSettings.GameSettingOnePlayer = (Settings)index;
+        }
+        else _gameSettings.GameSettingOnePlayer = Settings.Empty;
     }
     [ContextMenu("SaveDef")]
     public void SaveDefalth()

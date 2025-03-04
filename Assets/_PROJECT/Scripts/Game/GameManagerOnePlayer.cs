@@ -40,9 +40,13 @@ public class GameManagerOnePlayer : MonoBehaviour
         }
         StartRound();
     }
-
+    private void Start()
+    {
+        SettingsSetup();
+    }
     public void StartRound()
     {
+        Time.timeScale = 1f;
         _ball.RespawnBall();
         _ball.Rigidbody.linearVelocity = Vector3.down;
 
@@ -60,10 +64,12 @@ public class GameManagerOnePlayer : MonoBehaviour
         }
         _players[0].transform.position = _playerRespawn.position;
         _players[0].transform.rotation = _playerRespawn.rotation;
+        _startText.gameObject.SetActive(false);
     }
     public void Goal(bool _playerGate)
     {
-        StartCoroutine(TimeScale());
+        Invoke("StartRound", 1.7f);
+        Time.timeScale = 0.5f;
         if (_playerGate) _enemyPoint++;
         else _playerPoint++;
         UpdateDisplay();
@@ -73,18 +79,6 @@ public class GameManagerOnePlayer : MonoBehaviour
         {
             WinGame();
         }
-    }
-    private IEnumerator TimeScale()
-    {
-        while (Time.timeScale >= 0.5f)
-        {
-            Time.timeScale -= Time.deltaTime;
-        }
-       yield return new WaitForSeconds(1);
-        Time.timeScale = 1f;
-        _startText.gameObject.SetActive(false);
-        StartRound();
-        yield return null;
     }
     private void WinGame()
     {
@@ -99,6 +93,31 @@ public class GameManagerOnePlayer : MonoBehaviour
         _startText.gameObject.SetActive(true);
         _startText.text = "GOAL";
         _pointText.text = _playerPoint.ToString() + ":" + _enemyPoint.ToString();
+    }
+    private void SettingsSetup()
+    {
+        Settings settings;
+        settings = _gameSettings.GameSettingOnePlayer;
+        if(settings == Settings.Easy)
+        {
+            _enemy.LevelSettings(Settings.Easy);
+            _ball.LevelSettings(Settings.Easy);
+        }
+        else if(settings == Settings.Normal)
+        {
+            _enemy.LevelSettings(Settings.Normal);
+            _ball.LevelSettings(Settings.Normal);
+        }
+        else if (settings == Settings.Hard)
+        {
+            _enemy.LevelSettings(Settings.Hard);
+            _ball.LevelSettings(Settings.Hard);
+        }
+        else if (settings == Settings.Empty)
+        {
+            _ball.LevelSettings(Settings.Empty);
+        }
+
     }
     [ContextMenu("AddMoney")]
     private void AddMoney()
