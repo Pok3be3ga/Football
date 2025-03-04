@@ -3,10 +3,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float acceleration = 10.0f;
-    [SerializeField] private float maxSpeed = 5;
-    [SerializeField] private float RotationSpeed = 10f;
-    [SerializeField] private float JumpForce = 5.0f;
-    [SerializeField] private float _friction;
+    [SerializeField] private float _maxSpeed = 5;
+    [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private float _jumpForce = 5.0f;
+    [SerializeField] private float _gravity;
     [SerializeField] private Animator _animator;
 
     public KeyCode moveUpKey = KeyCode.W;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.maxLinearVelocity = maxSpeed;
+        _rigidbody.maxLinearVelocity = _maxSpeed;
     }
     void FixedUpdate()
     {
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_isGrounded && _rigidbody.linearVelocity.y < 0)
         {
-            _rigidbody.AddForce(Vector3.down * Physics.gravity.y * _friction, ForceMode.Acceleration);
+            _rigidbody.AddForce(Vector3.down * Physics.gravity.y * _gravity, ForceMode.Acceleration);
         }
     }
     private void Update()
@@ -54,11 +54,11 @@ public class PlayerMovement : MonoBehaviour
         _movementInput = new Vector3(horizontalInput, 0, verticalInput).normalized;
         if (_movementInput != Vector3.zero)
         {
-            _currentVelocity.x = Mathf.MoveTowards(_currentVelocity.x, _movementInput.x * maxSpeed, acceleration * Time.fixedDeltaTime);
-            _currentVelocity.z = Mathf.MoveTowards(_currentVelocity.z, _movementInput.z * maxSpeed, acceleration * Time.fixedDeltaTime);
+            _currentVelocity.x = Mathf.MoveTowards(_currentVelocity.x, _movementInput.x * _maxSpeed, acceleration * Time.fixedDeltaTime);
+            _currentVelocity.z = Mathf.MoveTowards(_currentVelocity.z, _movementInput.z * _maxSpeed, acceleration * Time.fixedDeltaTime);
 
             Quaternion toRotation = Quaternion.LookRotation(_movementInput);
-            _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, toRotation, RotationSpeed * Time.deltaTime * 100f));
+            _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, toRotation, _rotationSpeed * Time.deltaTime * 100f));
             _animator.SetBool("Idle", false);
             _animator.SetTrigger("Jump");
         }
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         _animator.SetTrigger("Jump");
-        _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
     private void OnCollisionStay(Collision collision)
