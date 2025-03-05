@@ -59,6 +59,7 @@ public class EnemyMovement : MonoBehaviour
             if (angle < 45f)
             {
                 _isGrounded = true;
+                _animator.ResetTrigger("Jump");
             }
         }
         if (collision.gameObject.CompareTag("Enviroment") && _isGrounded == true)
@@ -93,6 +94,7 @@ public class EnemyMovement : MonoBehaviour
     }
     private void Jump()
     {
+        _animator.SetTrigger("Jump");
         _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
     }
 
@@ -100,16 +102,16 @@ public class EnemyMovement : MonoBehaviour
     {
         if (settings == Settings.Easy)
         {
-            moveSpeed = 4.5f;
+            moveSpeed = 4f;
             _kickHead.SetActive(false);
         }
         else if (settings == Settings.Normal)
         {
-            moveSpeed = 5f;
+            moveSpeed = 4.5f;
         }
         else if (settings == Settings.Hard)
         {
-            moveSpeed = 5.5f;
+            moveSpeed = 5f;
             _kickHead.SetActive(true);
         }
     }

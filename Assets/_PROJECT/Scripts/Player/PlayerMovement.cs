@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Idle", true);
             _animator.SetTrigger("Jump");
         }
+        _animator.ResetTrigger("Jump");
         _rigidbody.MovePosition(transform.position + _currentVelocity * Time.fixedDeltaTime);
     }
 

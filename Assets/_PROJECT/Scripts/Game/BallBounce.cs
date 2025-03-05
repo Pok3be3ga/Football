@@ -58,9 +58,9 @@ public class BallBounce : MonoBehaviour
         {
             ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = _playerGate.position + new Vector3(
-                Random.Range(0, _randomValueEnemy),
-                Random.Range(0, _randomValueEnemy),
-                Random.Range(0, _randomValueEnemy)) - transform.position;
+                Random.Range(-_randomValueEnemy, _randomValueEnemy),
+                Random.Range(-_randomValueEnemy, _randomValueEnemy),
+                Random.Range(-_randomValueEnemy, _randomValueEnemy)) - transform.position;
             pushDirection.Normalize();
             Rigidbody.AddForce(pushDirection * PushForce, ForceMode.VelocityChange);
         }
@@ -76,18 +76,18 @@ public class BallBounce : MonoBehaviour
     {
         if (settings == Settings.Easy)
         {
-            _randomValueEnemy = 3f;
+            _randomValueEnemy = 5f;
             _randomValuePlayer = 0f;
         }
         else if (settings == Settings.Normal)
         {
-            _randomValueEnemy = 2f;
+            _randomValueEnemy = 3f;
             _randomValuePlayer = 2f;
         }
         else if (settings == Settings.Hard)
         {
             _randomValueEnemy = 1f;
-            _randomValuePlayer = 2f;
+            _randomValuePlayer = 1f;
         }
         else if (settings == Settings.Empty)
         {
