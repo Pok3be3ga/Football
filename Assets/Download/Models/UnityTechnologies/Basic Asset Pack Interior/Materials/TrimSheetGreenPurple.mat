@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 60098c39104cdda4296f7a228ee93537, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 17.64, y: 8.74}
         m_Offset: {x: 3.53, y: 0}
     - _DetailAlbedoMap:
@@ -34,7 +34,7 @@ Material:
         m_Scale: {x: 5.9, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 60098c39104cdda4296f7a228ee93537, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 17.64, y: 8.74}
         m_Offset: {x: 3.53, y: 0}
     m_Ints: []
