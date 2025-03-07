@@ -2,22 +2,21 @@ using UnityEngine;
 
 public class BallBounce : MonoBehaviour
 {
-    public float PushForce = 5f;
-    public Rigidbody Rigidbody;
-    [SerializeField] private float MaxSpeed = 10f;
-    [SerializeField] private float DirationUpSpeed = 2f;
+    [SerializeField] private float _pushForce = 5f;
+    [SerializeField] private float _maxSpeed = 10f;
+    [SerializeField] private float _randomPosition = 1f;
+    [SerializeField] private float _coefPushForse = 0.1f;
 
     [SerializeField] private Transform _playerGate;
     [SerializeField] private Transform _enemyGate;
-    [SerializeField] private AudioSource _ballAudio;
-    [SerializeField] private AudioClip _ballAudioClip;
     [SerializeField] private Transform _respawnBall;
 
-    [SerializeField] private float _randomPosition = 1f;
+    [SerializeField] private AudioSource _ballAudio;
+    [SerializeField] private AudioClip _ballAudioClip;
 
-
-    [SerializeField] private float _randomValuePlayer = 0f;
-    [SerializeField] private float _randomValueEnemy = 0f;
+    private Rigidbody _rb;
+    private float _randomValuePlayer = 0f;
+     private float _randomValueEnemy = 0f;
 
     private void Update()
     {
@@ -28,7 +27,8 @@ public class BallBounce : MonoBehaviour
     }
     void Start()
     {
-        Rigidbody.maxLinearVelocity = MaxSpeed;
+        _rb = GetComponent<Rigidbody>();
+        _rb.maxLinearVelocity = _maxSpeed;
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -37,7 +37,7 @@ public class BallBounce : MonoBehaviour
             ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = transform.position - contact.point;
             pushDirection.Normalize();
-            Rigidbody.AddForce(pushDirection * 0.2f, ForceMode.VelocityChange);
+            _rb.AddForce(pushDirection * _coefPushForse, ForceMode.VelocityChange);
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -51,7 +51,7 @@ public class BallBounce : MonoBehaviour
                 Random.Range(0, _randomValuePlayer),
                 Random.Range(0, _randomValuePlayer)) - transform.position;
             pushDirection.Normalize();
-            Rigidbody.AddForce(pushDirection * PushForce, ForceMode.VelocityChange);
+            _rb.AddForce(pushDirection * _pushForce, ForceMode.VelocityChange);
         }
 
         if (collision.gameObject.CompareTag("EnemyKick"))
@@ -62,15 +62,17 @@ public class BallBounce : MonoBehaviour
                 Random.Range(-_randomValueEnemy, _randomValueEnemy),
                 Random.Range(-_randomValueEnemy, _randomValueEnemy)) - transform.position;
             pushDirection.Normalize();
-            Rigidbody.AddForce(pushDirection * PushForce, ForceMode.VelocityChange);
+            _rb.AddForce(pushDirection * _pushForce, ForceMode.VelocityChange);
         }
     }
     public void RespawnBall()
     {
-        Rigidbody.angularVelocity = Vector3.zero;
-        Rigidbody.linearVelocity = Vector3.zero;
+        if(_rb == null) _rb = GetComponent<Rigidbody>();
+        _rb.angularVelocity = Vector3.zero;
+        _rb.linearVelocity = Vector3.zero;
         transform.position = _respawnBall.transform.position +
             new Vector3(Random.Range(-_randomPosition, _randomPosition), 0, Random.Range(-_randomPosition, _randomPosition));
+        _rb.linearVelocity = Vector3.down;
     }
     public void LevelSettings(Settings settings)
     {

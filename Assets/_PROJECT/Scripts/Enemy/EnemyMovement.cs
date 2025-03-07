@@ -8,11 +8,12 @@ public class EnemyMovement : MonoBehaviour
     public float JumpForce = 5.0f;
     [SerializeField] private float _gravity;
     [SerializeField] private Animator _animator;
+
     [SerializeField] private GameObject _kickHead;
     [SerializeField] private GameObject _kickFoot;
 
     private Rigidbody _rigidbody;
-    private float _timerJump = 0f;
+    private float _timer = 0f;
     private bool _isGrounded;
     private void OnEnable()
     {
@@ -32,7 +33,7 @@ public class EnemyMovement : MonoBehaviour
     }
     private void Update()
     {
-        _timerJump += Time.deltaTime;
+        _timer += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -64,10 +65,10 @@ public class EnemyMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enviroment") && _isGrounded == true)
         {
-            if (_timerJump > 1f)
+            if (_timer > 1f)
             {
                 Jump();
-                _timerJump = 0f;
+                _timer = 0f;
             }
         }
     }

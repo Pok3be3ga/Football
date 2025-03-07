@@ -13,6 +13,7 @@ public class GameManagerOnePlayer : MonoBehaviour
 
     [SerializeField] private PlayerMovement[] _players;
     [SerializeField] private EnemyMovement _enemy;
+    [SerializeField] private CameraMovement _cameraMovement;
 
     [SerializeField] private Transform _playerRespawn;
     [SerializeField] private Transform _enemyRespawn;
@@ -48,8 +49,7 @@ public class GameManagerOnePlayer : MonoBehaviour
     {
         Time.timeScale = 1f;
         _ball.RespawnBall();
-        _ball.Rigidbody.linearVelocity = Vector3.down;
-
+        _cameraMovement.ResetCamera();
         if (_twoPlayer)
         {
             _players[1].transform.position = _enemyRespawn.position;
