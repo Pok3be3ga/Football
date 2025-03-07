@@ -4543,8 +4543,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3295029, y: 0.07204502, z: 0.26199907}
-  m_Center: {x: 0.02202322, y: 0.07967536, z: -0.0007989307}
+  m_Size: {x: 0.3295029, y: 0.09100026, z: 0.4246081}
+  m_Center: {x: 0.022023221, y: 0.07019775, z: -0.03638808}
 --- !u!114 &889606468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13865,6 +13865,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7fae93771b686c248bba99ed51cf4327, type: 2}
+    - target: {fileID: 7019442449112239978, guid: d9cc1e4359be7a0459c7579c852a44f7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.4463534
+      objectReference: {fileID: 0}
     - target: {fileID: 7909525002829174532, guid: d9cc1e4359be7a0459c7579c852a44f7, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.05
@@ -13963,6 +13967,7 @@ PrefabInstance:
     - {fileID: 4799885893754773060, guid: d9cc1e4359be7a0459c7579c852a44f7, type: 3}
     - {fileID: 6081689430205105900, guid: d9cc1e4359be7a0459c7579c852a44f7, type: 3}
     - {fileID: 8061780252744559189, guid: d9cc1e4359be7a0459c7579c852a44f7, type: 3}
+    - {fileID: 8549216794259528364, guid: d9cc1e4359be7a0459c7579c852a44f7, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 657372763734685678, guid: d9cc1e4359be7a0459c7579c852a44f7, type: 3}
       insertIndex: -1
