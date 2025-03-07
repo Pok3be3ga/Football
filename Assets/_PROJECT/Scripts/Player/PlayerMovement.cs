@@ -35,9 +35,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void ApplyGravity()
     {
-        if (!_isGrounded && _rigidbody.linearVelocity.y < 0)
+        if (!_isGrounded && _rigidbody.linearVelocity.y < 0.1f)
         {
-            _rigidbody.AddForce(Vector3.down * Physics.gravity.y * _gravity, ForceMode.Acceleration);
+            _rigidbody.AddForce(Vector3.down * Physics.gravity.y * _gravity, ForceMode.Impulse);
         }
     }
     private void Update()
@@ -70,13 +70,14 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Idle", true);
             _animator.SetTrigger("Jump");
         }
+        _animator.ResetTrigger("Jump");
         _rigidbody.MovePosition(transform.position + _currentVelocity * Time.fixedDeltaTime);
     }
 
     private void Jump()
     {
         _animator.SetTrigger("Jump");
-        _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
     }
 
     private void OnCollisionStay(Collision collision)

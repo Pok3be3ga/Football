@@ -1,13 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game Settings")]
 public class GameSettings : ScriptableObject
 {
-    public int[] SaveGlovesFirstPlayer = new int[10];
-    public int[] SaveGlovesSecondPlayer = new int[10];
+    public int[] SaveGlovesFirstPlayer = new int[9];
+    public int[] SaveGlovesSecondPlayer = new int[9];
 
-    public GameObject[] FirstPlayer = new GameObject[3];
-    public GameObject[] SecondPlayer = new GameObject[3];
-
+    [HideInInspector] public Dictionary<int, bool> HairPayed = new Dictionary<int, bool>();
     public bool TwoPlayer;
+    public Settings GameSettingOnePlayer;
+}
+public enum Settings
+{
+    Easy,
+    Normal,
+    Hard,
+    Empty
 }
