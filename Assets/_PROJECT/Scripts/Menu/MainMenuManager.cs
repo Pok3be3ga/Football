@@ -8,21 +8,25 @@ using YG;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _moneyText;
+    [SerializeField] private CharacterControl _characterControlFirstPlayer;
+    [SerializeField] private CharacterControl _characterControlSecondPlayer;
+    [SerializeField] private PartsControl _partsControlFirstPlayer;
+    [SerializeField] private PartsControl _partsControlSecondPlayer;
     [SerializeField] private GameSettings _gameSettings;
-
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space,]
     [SerializeField] private Button _startButton;
     [SerializeField] private Toggle _secondPlayerToggle;
     [SerializeField] private GameObject[] _levelEnviroments;
     [SerializeField] private Button[] _levelChoseButtons;
     [SerializeField] private GameObject[] _secondPlayerObjectsActive;
+    [SerializeField] private TMP_Dropdown _levelSettingsDropDown;
 
-
-    [SerializeField] private TextMeshProUGUI _moneyText;
-    [SerializeField] private CharacterControl _characterControlFirstPlayer;
-    [SerializeField] private CharacterControl _characterControlSecondPlayer;
-
-    private int[] _saveGlovesFirstPlayer = new int[10];
-    private int[] _saveGlovesSecondPlayer = new int[10];
     private int _currentLevel;
     private void OnEnable()
     {
@@ -57,46 +61,53 @@ public class MainMenuManager : MonoBehaviour
     }
     private void AddMethodsOnButtons()
     {
-        _startButton.onClick.AddListener(StartLevel);
-        _levelChoseButtons[1].onClick.AddListener(NextLevel);
-        _levelChoseButtons[0].onClick.AddListener(LastLevel);
-        _secondPlayerToggle.onValueChanged.AddListener(AddSecondPlayer);
+        _startButton.onClick.AddListener(StartLevelClick);
+        _levelChoseButtons[1].onClick.AddListener(NextLevelClick);
+        _levelChoseButtons[0].onClick.AddListener(LastLevelClick);
+        _secondPlayerToggle.onValueChanged.AddListener(AddSecondPlayerClick);
     }
-    private void StartLevel()
+    private void StartLevelClick()
     {
         SaveInGameSettings();
         SceneManager.LoadScene(_levelEnviroments[_currentLevel].name);
     }
-    private void NextLevel()
+    private void NextLevelClick()
     {
         _levelEnviroments[_currentLevel].SetActive(false);
         if (_currentLevel < _levelEnviroments.Length - 1) _currentLevel++;
         else _currentLevel = 0;
         _levelEnviroments[_currentLevel].SetActive(true);
     }
-    private void LastLevel()
+    private void LastLevelClick()
     {
         _levelEnviroments[_currentLevel].SetActive(false);
         if (_currentLevel > 0) _currentLevel--;
         else _currentLevel = _levelEnviroments.Length - 1;
         _levelEnviroments[_currentLevel].SetActive(true);
     }
-    private void AddSecondPlayer(bool toggleValue)
+    private void AddSecondPlayerClick(bool toggleValue)
     {
+        _levelSettingsDropDown.gameObject.SetActive(!toggleValue);
         for (int i = 0; i < _secondPlayerObjectsActive.Length; i++)
         {
             _secondPlayerObjectsActive[i].SetActive(toggleValue);
         }
     }
 
-
     private void SaveInGameSettings()
     {
-        SaveByArrayPlayer(_characterControlFirstPlayer, _saveGlovesFirstPlayer);
-        SaveByArrayPlayer(_characterControlSecondPlayer, _saveGlovesSecondPlayer);
-        _gameSettings.SaveGlovesFirstPlayer = _saveGlovesFirstPlayer;
-        _gameSettings.SaveGlovesSecondPlayer = _saveGlovesSecondPlayer;
+        for (int i = 0; i < _partsControlFirstPlayer.ButtonParts.Count; i++)
+        {
+            _gameSettings.SaveGlovesFirstPlayer[i] = _partsControlFirstPlayer.ButtonParts[i].Index;
+            _gameSettings.SaveGlovesSecondPlayer[i] = _partsControlSecondPlayer.ButtonParts[i].Index;
+        }
         _gameSettings.TwoPlayer = _secondPlayerToggle.isOn;
+        if (_levelSettingsDropDown.gameObject.activeSelf == true)
+        {
+            int index = _levelSettingsDropDown.value;
+            _gameSettings.GameSettingOnePlayer = (Settings)index;
+        }
+        else _gameSettings.GameSettingOnePlayer = Settings.Empty;
     }
     [ContextMenu("SaveDef")]
     public void SaveDefalth()
@@ -107,26 +118,15 @@ public class MainMenuManager : MonoBehaviour
     [ContextMenu("Save")]
     public void SaveBuysInJSON()
     {
-        SaveByArrayPlayer(_characterControlFirstPlayer, _saveGlovesFirstPlayer);
-
-        YandexGame.savesData.CharacterPartsFirst = _saveGlovesFirstPlayer;
+        SaveInGameSettings();
+        YandexGame.savesData.CharacterPartsFirst = _gameSettings.SaveGlovesFirstPlayer;
         YandexGame.SaveProgress();
     }
 
     [ContextMenu("Load")]
     public void LoadBuysFromJSON()
     {
-        YandexGame.LoadProgress();
-        _saveGlovesFirstPlayer = YandexGame.savesData.CharacterPartsFirst;
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Hair, _saveGlovesFirstPlayer[1]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Face, _saveGlovesFirstPlayer[2]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Headgear, _saveGlovesFirstPlayer[3]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Top, _saveGlovesFirstPlayer[4]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Bottom, _saveGlovesFirstPlayer[5]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Eyewear, _saveGlovesFirstPlayer[6]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Bag, _saveGlovesFirstPlayer[7]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Shoes, _saveGlovesFirstPlayer[8]);
-        _characterControlFirstPlayer.CharacterBase.SetItem(PartsType.Glove, _saveGlovesFirstPlayer[9]);
+
     }
     private void SaveByArray(List<GameObject> gameObjects, int number, int[] gloves)
     {

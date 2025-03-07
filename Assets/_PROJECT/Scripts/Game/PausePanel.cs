@@ -25,6 +25,7 @@ public class PausePanel : MonoBehaviour
     private void ResetRound()
     {
         _gameManagerOnePlayer.StartRound();
+        _panel.gameObject.SetActive(false);
     }
     private void ResetScene()
     {
