@@ -61,6 +61,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 _isGrounded = true;
                 _animator.ResetTrigger("Jump");
+                _rigidbody.linearVelocity = Vector3.zero;
             }
         }
         if (collision.gameObject.CompareTag("Enviroment") && _isGrounded == true)

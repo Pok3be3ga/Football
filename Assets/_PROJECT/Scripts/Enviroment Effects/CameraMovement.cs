@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
 
         // ѕлавное перемещение камеры к целевой позиции
         //transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
-        if (targetX < (_max + _min) / 4f || targetX > (_max + _min) - (_max + _min) / 4f)
+        if (targetX < (_max + Mathf.Abs(_min)) / 4f || targetX > (_max + Mathf.Abs(_min)) - (_max + Mathf.Abs(_min)) / 4f)
             transform.position = Vector3.Lerp(transform.position, _targetPosition, _smoothSpeed);
     }
     public void ResetCamera()

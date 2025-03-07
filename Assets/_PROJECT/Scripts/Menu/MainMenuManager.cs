@@ -38,13 +38,16 @@ public class MainMenuManager : MonoBehaviour
     }
     public void GetLoad()
     {
-        _moneyText.text = YandexGame.savesData.Money.ToString();
-        //LoadBuysFromJSON();
+        LoadBuysFromJSON();
+        _gameSettings.Money = YandexGame.savesData.Money;
+    }
+    
+    private void FixedUpdate()
+    {
+        UpdateDisplay();
     }
     void Start()
     {
-        AddMethodsOnButtons();
-        //GetLoad();
         for (int i = 0; i < _secondPlayerObjectsActive.Length; i++)
         {
             _secondPlayerObjectsActive[i].SetActive(false);
@@ -53,7 +56,7 @@ public class MainMenuManager : MonoBehaviour
         {
             if (_levelEnviroments[i].activeSelf == true) _currentLevel = i;
         }
-
+        AddMethodsOnButtons();
         if (YandexGame.SDKEnabled == true)
         {
             GetLoad();
@@ -68,7 +71,7 @@ public class MainMenuManager : MonoBehaviour
     }
     private void StartLevelClick()
     {
-        SaveInGameSettings();
+        SaveBuysInJSON();
         SceneManager.LoadScene(_levelEnviroments[_currentLevel].name);
     }
     private void NextLevelClick()
@@ -120,13 +123,41 @@ public class MainMenuManager : MonoBehaviour
     {
         SaveInGameSettings();
         YandexGame.savesData.CharacterPartsFirst = _gameSettings.SaveGlovesFirstPlayer;
+        YandexGame.savesData.Money = _gameSettings.Money;
+
+        YandexGame.savesData.Hair = _gameSettings.Hair;
+        YandexGame.savesData.Face = _gameSettings.Face;
+        YandexGame.savesData.Headgear = _gameSettings.Headgear;
+        YandexGame.savesData.Top = _gameSettings.Top;
+        YandexGame.savesData.Bottom = _gameSettings.Bottom;
+        YandexGame.savesData.Bag = _gameSettings.Bag;
+        YandexGame.savesData.Shoes = _gameSettings.Shoes;
+        YandexGame.savesData.Glove = _gameSettings.Glove;
+        YandexGame.savesData.Eyewear = _gameSettings.Eyewear;
+
         YandexGame.SaveProgress();
     }
 
     [ContextMenu("Load")]
     public void LoadBuysFromJSON()
     {
+        if(YandexGame.savesData.Eyewear.Count != 0)
+        {
+            _gameSettings.Hair = YandexGame.savesData.Hair;
+            _gameSettings.Face = YandexGame.savesData.Face;
+            _gameSettings.Headgear = YandexGame.savesData.Headgear;
+            _gameSettings.Top = YandexGame.savesData.Top;
+            _gameSettings.Bottom = YandexGame.savesData.Bottom;
+            _gameSettings.Bag = YandexGame.savesData.Bag;
+            _gameSettings.Shoes = YandexGame.savesData.Shoes;
+            _gameSettings.Glove = YandexGame.savesData.Glove;
+            _gameSettings.Eyewear = YandexGame.savesData.Eyewear;
+        }
 
+    }
+    public void UpdateDisplay()
+    {
+        _moneyText.text = _gameSettings.Money.ToString();
     }
     private void SaveByArray(List<GameObject> gameObjects, int number, int[] gloves)
     {
