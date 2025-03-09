@@ -42,9 +42,9 @@ public class BallBounce : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        _ballAudio.PlayOneShot(_ballAudioClip);
         if (collision.gameObject.CompareTag("Kick"))
         {
+            _ballAudio.Play();
             ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = _enemyGate.position + new Vector3(
                 Random.Range(0, _randomValuePlayer),
@@ -56,6 +56,7 @@ public class BallBounce : MonoBehaviour
 
         if (collision.gameObject.CompareTag("EnemyKick"))
         {
+            _ballAudio.Play();
             ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = _playerGate.position + new Vector3(
                 Random.Range(-_randomValueEnemy, _randomValueEnemy),

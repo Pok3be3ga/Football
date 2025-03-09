@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,9 +64,14 @@ public class GameManagerOnePlayer : MonoBehaviour
         _players[0].transform.position = _playerRespawn.position;
         _players[0].transform.rotation = _playerRespawn.rotation;
         _startText.gameObject.SetActive(false);
+        
+        _gates[0].OnOfCollider(true);
+        _gates[1].OnOfCollider(true);
     }
     public void Goal(bool _playerGate)
     {
+        _gates[0].OnOfCollider(false);
+        _gates[1].OnOfCollider(false);
         Invoke("StartRound", 1.7f);
         Time.timeScale = 0.5f;
         if (_playerGate) _enemyPoint++;

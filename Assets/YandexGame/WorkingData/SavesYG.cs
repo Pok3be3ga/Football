@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace YG
 {
     [System.Serializable]
@@ -10,18 +12,20 @@ namespace YG
         public string language = "ru";
         public bool promptDone;
 
-        public enum LevelEnum
-        {
-            Easy,
-            Medium,
-            Hard
-        }
-
         // Ваши сохранения
         public int Money = 0;
-        public LevelEnum Level = LevelEnum.Easy;
         public int[] CharacterPartsFirst = new int[10];
         public int[] CharacterPartsSecond = new int[10];
+
+        public List<bool> Hair = new List<bool>();
+        public List<bool> Face = new List<bool>();
+        public List<bool> Headgear = new List<bool>();
+        public List<bool> Top = new List<bool>();
+        public List<bool> Bottom = new List<bool>();
+        public List<bool> Bag = new List<bool>();
+        public List<bool> Shoes = new List<bool>();
+        public List<bool> Glove = new List<bool>();
+        public List<bool> Eyewear = new List<bool>();
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 
