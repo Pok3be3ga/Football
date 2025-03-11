@@ -4,8 +4,10 @@ public class BallBounce : MonoBehaviour
 {
     [SerializeField] private float _pushForce = 5f;
     [SerializeField] private float _maxSpeed = 10f;
-    [SerializeField] private float _randomPosition = 1f;
+    [SerializeField] private float _randomPositionRespawn = 1f;
     [SerializeField] private float _coefPushForse = 0.1f;
+    [SerializeField] private float _distanceDribling = 0.5f;
+
 
     [SerializeField] private Transform _playerGate;
     [SerializeField] private Transform _enemyGate;
@@ -15,8 +17,9 @@ public class BallBounce : MonoBehaviour
     [SerializeField] private AudioClip _ballAudioClip;
 
     private Rigidbody _rb;
+    private Transform _ballDriblingTransform;
     private float _randomValuePlayer = 0f;
-     private float _randomValueEnemy = 0f;
+    private float _randomValueEnemy = 0f;
 
     private void Update()
     {
@@ -30,9 +33,23 @@ public class BallBounce : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _rb.maxLinearVelocity = _maxSpeed;
     }
+
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if(_ballDriblingTransform != null)
+            {
+                float distance = Vector3.Distance(transform.position, _ballDriblingTransform.position);
+                if (distance < _distanceDribling)
+                {
+
+                    _rb.MovePosition(_ballDriblingTransform.position);
+                }
+            }
+
+        }
+        if (collision.gameObject.CompareTag("Wall"))
         {
             ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = transform.position - contact.point;
@@ -42,14 +59,20 @@ public class BallBounce : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _ballDriblingTransform = collision.gameObject.GetComponentInParent<PlayerMovement>().Balldribling;
+        }
         if (collision.gameObject.CompareTag("Kick"))
         {
             _ballAudio.Play();
+            _ballDriblingTransform = null;
             ContactPoint contact = collision.contacts[0];
-            Vector3 pushDirection = _enemyGate.position + new Vector3(
-                Random.Range(0, _randomValuePlayer),
-                Random.Range(0, _randomValuePlayer),
-                Random.Range(0, _randomValuePlayer)) - transform.position;
+            Vector3 pushDirection = collision.transform.forward;
+                //+ new Vector3(
+                //Random.Range(-_randomValuePlayer, _randomValuePlayer),
+                //Random.Range(-_randomValuePlayer, _randomValuePlayer),
+                //Random.Range(-_randomValuePlayer, _randomValuePlayer)) - transform.position;
             pushDirection.Normalize();
             _rb.AddForce(pushDirection * _pushForce, ForceMode.VelocityChange);
         }
@@ -57,6 +80,7 @@ public class BallBounce : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyKick"))
         {
             _ballAudio.Play();
+            _ballDriblingTransform = null;
             ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = _playerGate.position + new Vector3(
                 Random.Range(-_randomValueEnemy, _randomValueEnemy),
@@ -68,11 +92,11 @@ public class BallBounce : MonoBehaviour
     }
     public void RespawnBall()
     {
-        if(_rb == null) _rb = GetComponent<Rigidbody>();
+        if (_rb == null) _rb = GetComponent<Rigidbody>();
         _rb.angularVelocity = Vector3.zero;
         _rb.linearVelocity = Vector3.zero;
         transform.position = _respawnBall.transform.position +
-            new Vector3(Random.Range(-_randomPosition, _randomPosition), 0, Random.Range(-_randomPosition, _randomPosition));
+            new Vector3(Random.Range(-_randomPositionRespawn, _randomPositionRespawn), 0, Random.Range(-_randomPositionRespawn, _randomPositionRespawn));
         _rb.linearVelocity = Vector3.down;
     }
     public void LevelSettings(Settings settings)
