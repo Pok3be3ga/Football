@@ -104,16 +104,16 @@ public class EnemyMovement : MonoBehaviour
     {
         if (settings == Settings.Easy)
         {
-            moveSpeed = 4f;
+            moveSpeed = 6f;
             _kickHead.SetActive(false);
         }
         else if (settings == Settings.Normal)
         {
-            moveSpeed = 4.5f;
+            moveSpeed = 6.5f;
         }
         else if (settings == Settings.Hard)
         {
-            moveSpeed = 5f;
+            moveSpeed = 7f;
             _kickHead.SetActive(true);
         }
     }

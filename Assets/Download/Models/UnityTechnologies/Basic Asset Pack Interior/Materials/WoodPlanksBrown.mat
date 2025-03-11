@@ -27,11 +27,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Metallic: 0.307
-    - _Smoothness: 0.484
+    - _Metallic: 0
+    - _Smoothness: 0
     m_Colors:
-    - _BaseColor: {r: 0.764151, g: 0.6402468, b: 0.56590426, a: 1}
-    - _Color: {r: 0.764151, g: 0.6402468, b: 0.56590426, a: 1}
+    - _BaseColor: {r: 0.5566038, g: 0.5121774, b: 0.41745284, a: 1}
+    - _Color: {r: 0.5566037, g: 0.5121773, b: 0.4174528, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4909114367327912840
