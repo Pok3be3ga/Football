@@ -10,26 +10,27 @@ namespace Layer_lab._3D_Casual_Character
         [SerializeField] private GameSettings _gameSettings;
         [SerializeField] private Button _priceButton;
         [SerializeField] private CharacterControl _characterControl;
-        [SerializeField] private Button _startButton;
         [SerializeField] private int _price;
-        private GameObject[] _parts;
         public int Index { get; private set; }
         [SerializeField] private TMP_Text textTitle;
         [field: SerializeField] private bool IsEmpty { get; set; }
         [SerializeField] private Image imageIcon;
+
         private PartsType CurrentPartType;
+
+        private GameObject[] _parts;
         private void OnEnable()
         {
             SaveInGameSettings();
         }
-        public void SetButton(PartsType partsType, GameObject[] parts, Sprite icon, bool isNone)
+        public void SetButton(PartsType partsType, GameObject[] parts, Sprite icon, bool isNone, int index)
         {
             CurrentPartType = partsType;
             IsEmpty = isNone;
             imageIcon.sprite = icon;
             imageIcon.SetNativeSize();
             _parts = parts;
-            SetParts();
+            SetParts(index);
         }
 
         private void SetParts()
@@ -46,6 +47,13 @@ namespace Layer_lab._3D_Casual_Character
 
             _SetTitle();
         }
+        private void SetParts(int index)
+        {
+            _characterControl.CharacterBase.SetItem(CurrentPartType, index);
+            Index = index;
+            _SetTitle();
+        }
+
 
 
 
@@ -169,8 +177,6 @@ namespace Layer_lab._3D_Casual_Character
             else if ((_parts.Length / 3 * 2) < Index) _price = 300;
 
             _priceButton.GetComponentInChildren<TextMeshProUGUI>().text = _price.ToString();
-            if (_priceButton.gameObject.activeSelf == true) _startButton.interactable = false;
-            else _startButton.interactable = true;
         }
         private void PriceButtonOnClick()
         {

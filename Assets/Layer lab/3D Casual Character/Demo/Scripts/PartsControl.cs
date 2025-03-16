@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using YG;
 
 namespace Layer_lab._3D_Casual_Character
 {
@@ -10,18 +11,21 @@ namespace Layer_lab._3D_Casual_Character
         [SerializeField] private Transform content;
         [SerializeField] private Sprite[] spriteIcons;
         public List<ButtonParts> ButtonParts = new();
+        private int[] _saveGloves = new int[9];
+        [SerializeField] private GameSettings _gameSettings;
 
         private void Start()
         {
-            SpawnPartsButton(PartsType.Hair,_characterControl.CharacterBase.PartsHair.ToArray(), $"{PartsType.Hair}", false);
-            SpawnPartsButton(PartsType.Face,_characterControl.CharacterBase.PartsFace.ToArray(), $"{PartsType.Face}", false);
-            SpawnPartsButton(PartsType.Headgear,_characterControl.CharacterBase.PartsHeadGear.ToArray(), $"{PartsType.Headgear}", true);
-            SpawnPartsButton(PartsType.Top,_characterControl.CharacterBase.PartsTop.ToArray(), $"{PartsType.Top}", false);
-            SpawnPartsButton(PartsType.Glove,_characterControl.CharacterBase.PartsGlove.ToArray(), $"{PartsType.Glove}", true);
-            SpawnPartsButton(PartsType.Bottom,_characterControl.CharacterBase.PartsBottom.ToArray(), $"{PartsType.Bottom}", false);
-            SpawnPartsButton(PartsType.Shoes,_characterControl.CharacterBase.PartsShoes.ToArray(), $"{PartsType.Shoes}", false);
-            SpawnPartsButton(PartsType.Bag,_characterControl.CharacterBase.PartsBag.ToArray(), $"{PartsType.Bag}", true);
-            SpawnPartsButton(PartsType.Eyewear,_characterControl.CharacterBase.PartsEyewear.ToArray(), $"{PartsType.Eyewear}", true);
+            _saveGloves = _gameSettings.SaveGlovesFirstPlayer;
+            SpawnPartsButton(PartsType.Hair,_characterControl.CharacterBase.PartsHair.ToArray(), $"{PartsType.Hair}", false, _saveGloves[0]);
+            SpawnPartsButton(PartsType.Face,_characterControl.CharacterBase.PartsFace.ToArray(), $"{PartsType.Face}", false, _saveGloves[1]);
+            SpawnPartsButton(PartsType.Headgear,_characterControl.CharacterBase.PartsHeadGear.ToArray(), $"{PartsType.Headgear}", true, _saveGloves[2]);
+            SpawnPartsButton(PartsType.Top,_characterControl.CharacterBase.PartsTop.ToArray(), $"{PartsType.Top}", false, _saveGloves[3]);
+            SpawnPartsButton(PartsType.Glove,_characterControl.CharacterBase.PartsGlove.ToArray(), $"{PartsType.Glove}", true, _saveGloves[4]);
+            SpawnPartsButton(PartsType.Bottom,_characterControl.CharacterBase.PartsBottom.ToArray(), $"{PartsType.Bottom}", false, _saveGloves[5]);
+            SpawnPartsButton(PartsType.Shoes,_characterControl.CharacterBase.PartsShoes.ToArray(), $"{PartsType.Shoes}", false, _saveGloves[6]);
+            SpawnPartsButton(PartsType.Bag,_characterControl.CharacterBase.PartsBag.ToArray(), $"{PartsType.Bag}", true, _saveGloves[7]);
+            SpawnPartsButton(PartsType.Eyewear,_characterControl.CharacterBase.PartsEyewear.ToArray(), $"{PartsType.Eyewear}", true, _saveGloves[8]);
             button.gameObject.SetActive(false);
         }
 
@@ -39,13 +43,12 @@ namespace Layer_lab._3D_Casual_Character
         }
 
         
-        public void SpawnPartsButton(PartsType partsType, GameObject[] parts, string name, bool isEmpty)
+        public void SpawnPartsButton(PartsType partsType, GameObject[] parts, string name, bool isEmpty, int index)
         {
             ButtonParts buttonParts = Instantiate(button, content, false);
-            buttonParts.SetButton(partsType, parts, GetSprite(name.ToLower()), isEmpty);
+            buttonParts.SetButton(partsType, parts, GetSprite(name.ToLower()), isEmpty, index);
             ButtonParts.Add(buttonParts);
         }
-
         public void SetAllRandom()
         {
             for (int i = 0; i < ButtonParts.Count; i++)

@@ -15,6 +15,8 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody _rigidbody;
     private float _timer = 0f;
     private bool _isGrounded;
+    private bool _staticState = true;
+
     private void OnEnable()
     {
         if (_rigidbody != null)
@@ -29,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.LogError("Rigidbody component not found on this GameObject.");
         }
         _rigidbody.maxLinearVelocity = 8f;
-        _animator.SetBool("Idle", false);
+        StateGame();
     }
     private void Update()
     {
@@ -38,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target != null)
+        if (target != null && _staticState == false)
         {
             ChaseTarget();
             LookAtTarget();
@@ -116,5 +118,27 @@ public class EnemyMovement : MonoBehaviour
             moveSpeed = 7f;
             _kickHead.SetActive(true);
         }
+    }
+    private void StateDelay()
+    {
+        _staticState = false;
+        _animator.SetBool("Idle", false);
+    }
+    public void StateGame()
+    {
+        _animator.SetBool("Idle", true);
+        Invoke("StateDelay", Random.Range(1f, 2f));
+    }
+    public void StateWin()
+    {
+        _staticState = true;
+        _animator.SetTrigger("Win");
+        transform.rotation = Quaternion.Euler(0f, 180f, 0);
+    }
+    public void StateLoose()
+    {
+        _staticState = true;
+        _animator.SetTrigger("Lose");
+        transform.rotation = Quaternion.Euler(0f, 180f, 0);
     }
 }

@@ -17,15 +17,14 @@ public class MainMenuManager : MonoBehaviour
     [Space]
     [Space]
     [Space]
-    [Space]
-    [Space]
-    [Space,]
+    [SerializeField] private Button _buttonADV;
     [SerializeField] private Button _startButton;
     [SerializeField] private Toggle _secondPlayerToggle;
     [SerializeField] private GameObject[] _levelEnviroments;
     [SerializeField] private Button[] _levelChoseButtons;
     [SerializeField] private GameObject[] _secondPlayerObjectsActive;
     [SerializeField] private TMP_Dropdown _levelSettingsDropDown;
+    [SerializeField] private TextMeshProUGUI _roomName;
 
     private int _currentLevel;
     private void OnEnable()
@@ -55,6 +54,7 @@ public class MainMenuManager : MonoBehaviour
         for (int i = 0; i < _levelEnviroments.Length; i++)
         {
             if (_levelEnviroments[i].activeSelf == true) _currentLevel = i;
+            _roomName.text = _levelEnviroments[_currentLevel].name;
         }
         AddMethodsOnButtons();
         if (YandexGame.SDKEnabled == true)
@@ -68,6 +68,7 @@ public class MainMenuManager : MonoBehaviour
         _levelChoseButtons[1].onClick.AddListener(NextLevelClick);
         _levelChoseButtons[0].onClick.AddListener(LastLevelClick);
         _secondPlayerToggle.onValueChanged.AddListener(AddSecondPlayerClick);
+        _buttonADV.onClick.AddListener(ADV);
     }
     private void StartLevelClick()
     {
@@ -80,6 +81,7 @@ public class MainMenuManager : MonoBehaviour
         if (_currentLevel < _levelEnviroments.Length - 1) _currentLevel++;
         else _currentLevel = 0;
         _levelEnviroments[_currentLevel].SetActive(true);
+        _roomName.text = _levelEnviroments[_currentLevel].name;
     }
     private void LastLevelClick()
     {
@@ -87,6 +89,7 @@ public class MainMenuManager : MonoBehaviour
         if (_currentLevel > 0) _currentLevel--;
         else _currentLevel = _levelEnviroments.Length - 1;
         _levelEnviroments[_currentLevel].SetActive(true);
+        _roomName.text = _levelEnviroments[_currentLevel].name;
     }
     private void AddSecondPlayerClick(bool toggleValue)
     {
@@ -96,6 +99,18 @@ public class MainMenuManager : MonoBehaviour
             _secondPlayerObjectsActive[i].SetActive(toggleValue);
         }
     }
+    public void UpdateDisplay()
+    {
+        _moneyText.text = _gameSettings.Money.ToString();
+    }
+    private void ADV()
+    {
+        YandexGame.RewVideoShow(0);
+       
+        _gameSettings.Money += 500;
+        UpdateDisplay();
+    }
+    #region Save
 
     private void SaveInGameSettings()
     {
@@ -141,6 +156,7 @@ public class MainMenuManager : MonoBehaviour
     [ContextMenu("Load")]
     public void LoadBuysFromJSON()
     {
+
         if(YandexGame.savesData.Eyewear.Count != 0)
         {
             _gameSettings.Hair = YandexGame.savesData.Hair;
@@ -153,33 +169,8 @@ public class MainMenuManager : MonoBehaviour
             _gameSettings.Glove = YandexGame.savesData.Glove;
             _gameSettings.Eyewear = YandexGame.savesData.Eyewear;
         }
+        _gameSettings.SaveGlovesFirstPlayer = YandexGame.savesData.CharacterPartsFirst;
 
     }
-    public void UpdateDisplay()
-    {
-        _moneyText.text = _gameSettings.Money.ToString();
-    }
-    private void SaveByArray(List<GameObject> gameObjects, int number, int[] gloves)
-    {
-        for (int j = 0; j < gameObjects.Count; j++)
-        {
-            if (gameObjects[j].activeSelf == true)
-            {
-                gloves[number] = gameObjects.IndexOf(gameObjects[j]);
-            }
-        }
-    }
-    private void SaveByArrayPlayer(CharacterControl characterControl, int[] gloves)
-    {
-
-        SaveByArray(characterControl.CharacterBase.PartsHair, 1, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsFace, 2, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsHeadGear, 3, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsTop, 4, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsBottom, 5, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsEyewear, 6, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsBag, 7, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsShoes, 8, gloves);
-        SaveByArray(characterControl.CharacterBase.PartsGlove, 9, gloves);
-    }
+    #endregion
 }

@@ -87,13 +87,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pushForce: 18
   _maxSpeed: 15
-  _randomPosition: 2
+  _randomPositionRespawn: 1
   _coefPushForse: 0.1
+  _distanceDribling: 0.5
   _playerGate: {fileID: 0}
   _enemyGate: {fileID: 0}
   _respawnBall: {fileID: 0}
   _ballAudio: {fileID: 866866159326287773}
-  _ballAudioClip: {fileID: 8300000, guid: b470e71553189a44c9ae6c724beb3ba8, type: 3}
+  _ballAudioClip: {fileID: 8300000, guid: 995f6c26c120828459a777df1c59d52b, type: 3}
 --- !u!82 &866866159326287773
 AudioSource:
   m_ObjectHideFlags: 0
@@ -104,8 +105,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b470e71553189a44c9ae6c724beb3ba8, type: 3}
-  m_Resource: {fileID: 8300000, guid: b470e71553189a44c9ae6c724beb3ba8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 995f6c26c120828459a777df1c59d52b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 995f6c26c120828459a777df1c59d52b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

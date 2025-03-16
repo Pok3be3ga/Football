@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5176740503653377481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5760002, z: 0}
+  m_LocalPosition: {x: 0, y: 1.1820002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -177,7 +177,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.6845471, z: -0, w: -0.7289686}
   m_LocalPosition: {x: 20.7, y: 25.49, z: -26.37}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9133162743379081515}
@@ -225,13 +225,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 6
+  moveSpeed: 7
   rotationSpeed: 500
   JumpForce: 70
   _gravity: -10
   _animator: {fileID: 1923533527732901296}
   _kickHead: {fileID: 5176740503653377481}
   _kickFoot: {fileID: 6545360578404466209}
+  StaticState: 0
 --- !u!1 &6545360578404466209
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +263,7 @@ Transform:
   m_GameObject: {fileID: 6545360578404466209}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16266823, z: 0}
+  m_LocalPosition: {x: 0, y: 0.12199974, z: 0}
   m_LocalScale: {x: 1.0535127, y: -0.40501243, z: 1.0535127}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -393,6 +394,7 @@ GameObject:
   - component: {fileID: 7189548166375713096}
   - component: {fileID: 3082302622382020085}
   - component: {fileID: 5871818665999542393}
+  - component: {fileID: 6193733940493446056}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -488,10 +490,33 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.23
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.28, z: 0}
+--- !u!136 &6193733940493446056
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158030461300403578}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.37
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!1001 &3821776051970318463
 PrefabInstance:
   m_ObjectHideFlags: 0
