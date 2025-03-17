@@ -46,13 +46,6 @@ public class GameManagerOnePlayer : MonoBehaviour
     {
         SettingsSetup();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame();
-        }
-    }
     public void StartRound()
     {
         Time.timeScale = 1f;

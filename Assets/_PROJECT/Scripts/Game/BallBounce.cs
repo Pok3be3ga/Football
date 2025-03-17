@@ -49,13 +49,13 @@ public class BallBounce : MonoBehaviour
             }
 
         }
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            ContactPoint contact = collision.contacts[0];
-            Vector3 pushDirection = transform.position - contact.point;
-            pushDirection.Normalize();
-            _rb.AddForce(pushDirection * _coefPushForse, ForceMode.VelocityChange);
-        }
+        //if (collision.gameObject.CompareTag("Wall"))
+        //{
+        //    ContactPoint contact = collision.contacts[0];
+        //    Vector3 pushDirection = transform.position - contact.point;
+        //    pushDirection.Normalize();
+        //    _rb.AddForce(pushDirection * _coefPushForse, ForceMode.VelocityChange);
+        //}
     }
     private void OnCollisionEnter(Collision collision)
     {

@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private float _jumpForce = 5.0f;
     [SerializeField] private float _gravity;
-    [SerializeField] private Animator _animator;
+    public Animator Animator;
 
     public KeyCode moveUpKey = KeyCode.W;
     public KeyCode moveDownKey = KeyCode.S;
@@ -64,25 +64,25 @@ public class PlayerMovement : MonoBehaviour
 
                 Quaternion toRotation = Quaternion.LookRotation(_movementInput);
                 _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, toRotation, _rotationSpeed * Time.deltaTime * 100f));
-                _animator.SetBool("Idle", false);
-                _animator.SetTrigger("Jump");
+                Animator.SetBool("Idle", false);
+                Animator.SetTrigger("Jump");
             }
             else
             {
                 _currentVelocity.x = Mathf.MoveTowards(_currentVelocity.x, 0, acceleration * Time.fixedDeltaTime);
                 _currentVelocity.z = Mathf.MoveTowards(_currentVelocity.z, 0, acceleration * Time.fixedDeltaTime);
 
-                _animator.SetBool("Idle", true);
-                _animator.SetTrigger("Jump");
+                Animator.SetBool("Idle", true);
+                Animator.SetTrigger("Jump");
             }
-            _animator.ResetTrigger("Jump");
+            Animator.ResetTrigger("Jump");
             _rigidbody.MovePosition(transform.position + _currentVelocity * Time.fixedDeltaTime);
         }
     }
 
     private void Jump()
     {
-        _animator.SetTrigger("Jump");
+        Animator.SetTrigger("Jump");
         _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
     }
 
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void KickAnimation()
     {
-        _animator.SetTrigger("Kick");
+        Animator.SetTrigger("Kick");
     }
 
     public void StateGame()
@@ -116,14 +116,14 @@ public class PlayerMovement : MonoBehaviour
     public void StateWin()
     {
         _staticState = true;
-        _animator.SetTrigger("Win");
+        Animator.SetTrigger("Win");
         transform.rotation = Quaternion.Euler(0f, 180f, 0);
 
     }
     public void StateLoose()
     {
         _staticState = true;
-        _animator.SetTrigger("Lose");
+        Animator.SetTrigger("Lose");
         transform.rotation = Quaternion.Euler(0f, 180f, 0);
 
     }

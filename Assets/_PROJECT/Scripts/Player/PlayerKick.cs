@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerKick : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class PlayerKick : MonoBehaviour
     IEnumerator Kick()
     {
         _player.KickAnimation();
+        yield return new WaitForSeconds(_kickDuration/4f);
         _kickObject.SetActive(true);
         yield return new WaitForSeconds(_kickDuration);
         _kickObject.SetActive(false);

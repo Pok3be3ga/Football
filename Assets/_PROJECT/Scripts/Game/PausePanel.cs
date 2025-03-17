@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PausePanel : MonoBehaviour
 {
-    [SerializeField] private Button _mainMenuButton;
+    [SerializeField] private Button[] _mainMenuButton;
     [SerializeField] private Button _resetRound;
     [SerializeField] private Button _resetScene;
     [SerializeField] private Image _panel;
@@ -13,7 +13,10 @@ public class PausePanel : MonoBehaviour
     [SerializeField] private GameManagerOnePlayer _gameManagerOnePlayer;
     void Start()
     {
-        _mainMenuButton.onClick.AddListener(Menu);
+        for (int i = 0; i < _mainMenuButton.Length; i++)
+        {
+            _mainMenuButton[i].onClick.AddListener(Menu);
+        }
         _resetRound.onClick.AddListener(ResetRound);
         _resetScene.onClick.AddListener(ResetScene);
     }
@@ -37,7 +40,21 @@ public class PausePanel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _panel.gameObject.SetActive(!_panel.gameObject.activeSelf);
+            PauseGame();
         }
+    }
+    private void PauseGame()
+    {
+        if (Time.timeScale == 1f)
+        {
+            _panel.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else if (Time.timeScale == 0f)
+        {
+            _panel.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
     }
 }
