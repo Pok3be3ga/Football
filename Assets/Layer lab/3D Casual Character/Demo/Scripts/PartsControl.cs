@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using YG;
 
 namespace Layer_lab._3D_Casual_Character
 {

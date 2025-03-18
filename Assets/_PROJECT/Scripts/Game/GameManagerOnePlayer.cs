@@ -103,10 +103,13 @@ public class GameManagerOnePlayer : MonoBehaviour
         if (_playerPoint == 5)
         {
             WinGame();
+            _startText.gameObject.SetActive(false );
         }
         else if (_enemyPoint == 5)
         {
             LoseGame();
+            _startText.gameObject.SetActive(false);
+
         }
         else Invoke("StartRound", 1.7f);
     }
@@ -124,19 +127,6 @@ public class GameManagerOnePlayer : MonoBehaviour
         Time.timeScale = 0.5f;
         _panels[1].gameObject.SetActive(true);
         _enemy.enabled = false;
-    }
-    private void PauseGame()
-    {
-        if(Time.timeScale == 1f)
-        {
-            _panels[0].gameObject.SetActive(true);
-            Time.timeScale = 0f;
-        }else if(Time.timeScale == 0f)
-        {
-            _panels[0].gameObject.SetActive(false);
-            Time.timeScale = 1f;
-        }
-
     }
     private void UpdateDisplay()
     {

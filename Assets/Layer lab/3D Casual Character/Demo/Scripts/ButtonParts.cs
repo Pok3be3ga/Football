@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace Layer_lab._3D_Casual_Character
 {
@@ -91,7 +92,6 @@ namespace Layer_lab._3D_Casual_Character
             _SetParts();
             _SetTitle();
             SetPriceButton();
-            PriceButtonOnClick();
         }
 
 
@@ -177,6 +177,8 @@ namespace Layer_lab._3D_Casual_Character
             else if ((_parts.Length / 3 * 2) < Index) _price = 300;
 
             _priceButton.GetComponentInChildren<TextMeshProUGUI>().text = _price.ToString();
+
+            PriceButtonOnClick();
         }
         private void PriceButtonOnClick()
         {
@@ -186,16 +188,19 @@ namespace Layer_lab._3D_Casual_Character
                 if (_price <= _gameSettings.Money)
                 {
                     _gameSettings.Money -= _price;
-                    _parts[Index].AddComponent<Buy>();
+                    YandexGame.savesData.Money = _gameSettings.Money;
+                    YandexGame.SaveProgress();
+                    _parts[Index].gameObject.AddComponent<Buy>();
                     if (CurrentPartType == PartsType.Hair) _gameSettings.Hair[Index] = true;
-                    if (CurrentPartType == PartsType.Face) _gameSettings.Face[Index] = true;
-                    if (CurrentPartType == PartsType.Headgear) _gameSettings.Headgear[Index] = true;
-                    if (CurrentPartType == PartsType.Top) _gameSettings.Top[Index] = true;
-                    if (CurrentPartType == PartsType.Bottom) _gameSettings.Bottom[Index] = true;
-                    if (CurrentPartType == PartsType.Bag) _gameSettings.Bag[Index] = true;
-                    if (CurrentPartType == PartsType.Shoes) _gameSettings.Shoes[Index] = true;
-                    if (CurrentPartType == PartsType.Glove) _gameSettings.Glove[Index] = true;
-                    if (CurrentPartType == PartsType.Eyewear) _gameSettings.Eyewear[Index] = true;
+                    else if (CurrentPartType == PartsType.Face) _gameSettings.Face[Index] = true;
+                    else if (CurrentPartType == PartsType.Headgear) _gameSettings.Headgear[Index] = true;
+                    else if (CurrentPartType == PartsType.Top) _gameSettings.Top[Index] = true;
+                    else if (CurrentPartType == PartsType.Bottom) _gameSettings.Bottom[Index] = true;
+                    else if (CurrentPartType == PartsType.Bag) _gameSettings.Bag[Index] = true;
+                    else if (CurrentPartType == PartsType.Shoes) _gameSettings.Shoes[Index] = true;
+                    else if (CurrentPartType == PartsType.Glove) _gameSettings.Glove[Index] = true;
+                    else if (CurrentPartType == PartsType.Eyewear) _gameSettings.Eyewear[Index] = true;
+
                     _priceButton.gameObject.SetActive(false);
 
                 }

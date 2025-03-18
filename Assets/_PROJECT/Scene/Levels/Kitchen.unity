@@ -3802,10 +3802,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1939898878060225502, guid: ef06633ce8757d2448128f1cc04186e6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 448
-      objectReference: {fileID: 0}
     - target: {fileID: 5326626545353631026, guid: ef06633ce8757d2448128f1cc04186e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3894,20 +3890,7 @@ PrefabInstance:
       propertyPath: _gameManagerOnePlayer
       value: 
       objectReference: {fileID: 1451064748}
-    - target: {fileID: 7241414115324164029, guid: ef06633ce8757d2448128f1cc04186e6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8559286601881929540, guid: ef06633ce8757d2448128f1cc04186e6, type: 3}
-      propertyPath: m_margin.y
-      value: 311.21994
-      objectReference: {fileID: 0}
-    - target: {fileID: 8559286601881929540, guid: ef06633ce8757d2448128f1cc04186e6, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2269793554123077917, guid: dc2cc93475f76427c86a8262bee36b88, type: 2}
-    m_RemovedComponents:
-    - {fileID: 6473411475813763251, guid: ef06633ce8757d2448128f1cc04186e6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

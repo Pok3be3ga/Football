@@ -6,7 +6,7 @@ public class PausePanel : MonoBehaviour
 {
     [SerializeField] private Button[] _mainMenuButton;
     [SerializeField] private Button _resetRound;
-    [SerializeField] private Button _resetScene;
+    [SerializeField] private Button[] _resetScene;
     [SerializeField] private Image _panel;
 
 
@@ -16,9 +16,10 @@ public class PausePanel : MonoBehaviour
         for (int i = 0; i < _mainMenuButton.Length; i++)
         {
             _mainMenuButton[i].onClick.AddListener(Menu);
+            _resetScene[i].onClick.AddListener(ResetScene);
         }
         _resetRound.onClick.AddListener(ResetRound);
-        _resetScene.onClick.AddListener(ResetScene);
+
     }
     private void Menu()
     {

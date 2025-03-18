@@ -20,6 +20,9 @@ public class GameSettings : ScriptableObject
     public List<bool> Shoes = new List<bool>();
     public List<bool> Glove = new List<bool>();
     public List<bool> Eyewear = new List<bool>();
+
+    public bool MusicToggle = true;
+    public float AudioValume = 0.5f;
 }
 public enum Settings
 {

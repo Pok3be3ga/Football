@@ -1,5 +1,4 @@
 using Layer_lab._3D_Casual_Character;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -159,6 +158,7 @@ public class MainMenuManager : MonoBehaviour
 
         if(YandexGame.savesData.Eyewear.Count != 0)
         {
+            _gameSettings.SaveGlovesFirstPlayer = YandexGame.savesData.CharacterPartsFirst;
             _gameSettings.Hair = YandexGame.savesData.Hair;
             _gameSettings.Face = YandexGame.savesData.Face;
             _gameSettings.Headgear = YandexGame.savesData.Headgear;
@@ -169,8 +169,6 @@ public class MainMenuManager : MonoBehaviour
             _gameSettings.Glove = YandexGame.savesData.Glove;
             _gameSettings.Eyewear = YandexGame.savesData.Eyewear;
         }
-        _gameSettings.SaveGlovesFirstPlayer = YandexGame.savesData.CharacterPartsFirst;
-
     }
     #endregion
 }

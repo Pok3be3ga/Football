@@ -5,7 +5,7 @@ public class BallBounce : MonoBehaviour
     [SerializeField] private float _pushForce = 5f;
     [SerializeField] private float _maxSpeed = 10f;
     [SerializeField] private float _randomPositionRespawn = 1f;
-    [SerializeField] private float _coefPushForse = 0.1f;
+    //[SerializeField] private float _coefPushForse = 0.1f;
     [SerializeField] private float _distanceDribling = 0.5f;
 
 
