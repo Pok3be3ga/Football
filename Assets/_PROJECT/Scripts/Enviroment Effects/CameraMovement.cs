@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour
     private Vector3 _targetPosition;   // Целевая позиция камеры
     private void Awake()
     {
-        _startX = (Mathf.Abs(_minX) + Mathf.Abs(_maxX)) / 2f;
+        _startX = transform.position.x;
 
         ResetCamera();
     }
@@ -23,7 +23,7 @@ public class CameraMovement : MonoBehaviour
 
         // Плавное перемещение камеры к целевой позиции
         //transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
-        if (targetX < (_maxX + Mathf.Abs(_minX)) / 4f || targetX > (_maxX + Mathf.Abs(_minX)) - (_maxX + Mathf.Abs(_minX)) / 4f)
+       // if (targetX < (_maxX + Mathf.Abs(_minX)) / 4f || targetX > (_maxX + Mathf.Abs(_minX)) - (_maxX + Mathf.Abs(_minX)) / 4f)
             transform.position = Vector3.Lerp(transform.position, _targetPosition, _smoothSpeed);
     }
     public void ResetCamera()

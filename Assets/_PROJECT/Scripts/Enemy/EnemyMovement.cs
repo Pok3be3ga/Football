@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -5,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
     public Transform target; // The object to chase
     public float moveSpeed = 5.0f; // Speed of the chaser
     public float rotationSpeed = 10.0f; // Rotation speed of the chaser
-    public float JumpForce = 5.0f;
+    //public float JumpForce = 5.0f;
     [SerializeField] private float _gravity;
     [SerializeField] private Animator _animator;
 
@@ -13,15 +14,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private GameObject _kickFoot;
 
     private Rigidbody _rigidbody;
-    private float _timer = 0f;
+    private bool _dribling = true;
+    //private float _timer = 0f;
     private bool _isGrounded;
     private bool _staticState = true;
-
-    private void OnEnable()
-    {
-        if (_rigidbody != null)
-            _rigidbody.linearVelocity = Vector3.zero;
-    }
     void Start()
     {
 
@@ -33,27 +29,34 @@ public class EnemyMovement : MonoBehaviour
         _rigidbody.maxLinearVelocity = 8f;
         StateGame();
     }
-    private void Update()
-    {
-        _timer += Time.deltaTime;
-    }
-
     void FixedUpdate()
     {
         if (target != null && _staticState == false)
         {
-            ChaseTarget();
+            MoveEnemy();
             LookAtTarget();
         }
         ApplyGravity();
     }
     private void ApplyGravity()
     {
-        if (!_isGrounded && _rigidbody.linearVelocity.y < 0)
+        if (_rigidbody.linearVelocity.y < 0)
         {
             _rigidbody.AddForce(Vector3.down * Physics.gravity.y * _gravity, ForceMode.Acceleration);
         }
+        if(_rigidbody.linearVelocity.x < 0 || _rigidbody.linearVelocity.z < 0)
+        {
+            _rigidbody.linearVelocity = Vector3.zero;
+        }
     }
+    public void OnContact()
+    {
+        _dribling = false;
+        _animator.SetTrigger("Back");
+        StopAllCoroutines();
+        StartCoroutine(StopDribling());
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         for (int i = 0; i < collision.contactCount; i++)
@@ -66,24 +69,33 @@ public class EnemyMovement : MonoBehaviour
                 _rigidbody.linearVelocity = Vector3.zero;
             }
         }
-        if (collision.gameObject.CompareTag("Enviroment") && _isGrounded == true)
+        //if (collision.gameObject.CompareTag("Enviroment") && _isGrounded == true)
+        //{
+        //    if (_timer > 1f)
+        //    {
+        //        Jump();
+        //        _timer = 0f;
+        //    }
+        //}
+    }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    _isGrounded = false;
+    //}
+    private void MoveEnemy()
+    {
+        if (_dribling)
         {
-            if (_timer > 1f)
-            {
-                Jump();
-                _timer = 0f;
-            }
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            Vector3 moveDirection = new Vector3(directionToTarget.x, 0, directionToTarget.z);
+            _rigidbody.MovePosition(transform.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
         }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        _isGrounded = false;
-    }
-    private void ChaseTarget()
-    {
-        Vector3 directionToTarget = (target.position - transform.position).normalized;
-        Vector3 moveDirection = new Vector3(directionToTarget.x, 0, directionToTarget.z);
-        _rigidbody.MovePosition(transform.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+        else
+        {
+            Vector3 directionToTarget = (transform.position - target.position).normalized;
+            Vector3 moveDirection = new Vector3(directionToTarget.x + 1f, 0, directionToTarget.z - 1f);
+            _rigidbody.MovePosition(transform.position + moveDirection * moveSpeed / 4f * Time.fixedDeltaTime);
+        }
     }
     private void LookAtTarget()
     {
@@ -96,11 +108,11 @@ public class EnemyMovement : MonoBehaviour
             _rigidbody.MoveRotation(newRotation);
         }
     }
-    private void Jump()
-    {
-        _animator.SetTrigger("Jump");
-        _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
-    }
+    //private void Jump()
+    //{
+    //    _animator.SetTrigger("Jump");
+    //    //_rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
+    //}
 
     public void LevelSettings(Settings settings)
     {
@@ -118,6 +130,10 @@ public class EnemyMovement : MonoBehaviour
             moveSpeed = 7f;
             _kickHead.SetActive(true);
         }
+    }
+    public void KickAnimation()
+    {
+        _animator.SetTrigger("Kick");
     }
     private void StateDelay()
     {
@@ -140,5 +156,10 @@ public class EnemyMovement : MonoBehaviour
         _staticState = true;
         _animator.SetTrigger("Lose");
         transform.rotation = Quaternion.Euler(0f, 180f, 0);
+    }
+    private IEnumerator StopDribling()
+    {
+        yield return new WaitForSeconds(1);
+        _dribling = true;
     }
 }

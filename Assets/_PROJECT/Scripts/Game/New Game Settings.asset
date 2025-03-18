@@ -16,7 +16,7 @@ MonoBehaviour:
   SaveGlovesFirstPlayer: 0000000000000000ffffffff00000000ffffffff0000000000000000ffffffffffffffff
   SaveGlovesSecondPlayer: 0000000000000000ffffffff00000000ffffffff0000000000000000ffffffffffffffff
   BallIndex: 0
-  TwoPlayer: 1
+  TwoPlayer: 0
   GameSettingOnePlayer: 0
   Hair: 01000000000000
   Face: 01000000000000000000
