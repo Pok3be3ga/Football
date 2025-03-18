@@ -7,7 +7,7 @@ public class PausePanel : MonoBehaviour
     [SerializeField] private Button[] _mainMenuButton;
     [SerializeField] private Button _resetRound;
     [SerializeField] private Button[] _resetScene;
-    [SerializeField] private Image _panel;
+    [SerializeField] private Image _panelPause;
 
 
     [SerializeField] private GameManagerOnePlayer _gameManagerOnePlayer;
@@ -19,6 +19,7 @@ public class PausePanel : MonoBehaviour
             _resetScene[i].onClick.AddListener(ResetScene);
         }
         _resetRound.onClick.AddListener(ResetRound);
+        _panelPause.gameObject.SetActive(false);
 
     }
     private void Menu()
@@ -29,7 +30,7 @@ public class PausePanel : MonoBehaviour
     private void ResetRound()
     {
         _gameManagerOnePlayer.StartRound();
-        _panel.gameObject.SetActive(false);
+        _panelPause.gameObject.SetActive(false);
     }
     private void ResetScene()
     {
@@ -48,12 +49,12 @@ public class PausePanel : MonoBehaviour
     {
         if (Time.timeScale == 1f)
         {
-            _panel.gameObject.SetActive(true);
+            _panelPause.gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
         else if (Time.timeScale == 0f)
         {
-            _panel.gameObject.SetActive(false);
+            _panelPause.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
 

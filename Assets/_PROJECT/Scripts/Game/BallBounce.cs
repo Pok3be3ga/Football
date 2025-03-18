@@ -38,7 +38,7 @@ public class BallBounce : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(_ballDriblingTransform != null)
+            if (_ballDriblingTransform != null)
             {
                 float distance = Vector3.Distance(transform.position, _ballDriblingTransform.position);
                 if (distance < _distanceDribling)
@@ -49,16 +49,10 @@ public class BallBounce : MonoBehaviour
             }
 
         }
-        //if (collision.gameObject.CompareTag("Wall"))
-        //{
-        //    ContactPoint contact = collision.contacts[0];
-        //    Vector3 pushDirection = transform.position - contact.point;
-        //    pushDirection.Normalize();
-        //    _rb.AddForce(pushDirection * _coefPushForse, ForceMode.VelocityChange);
-        //}
     }
     private void OnCollisionEnter(Collision collision)
     {
+        _ballDriblingTransform = null;
         if (collision.gameObject.CompareTag("Player"))
         {
             _ballDriblingTransform = collision.gameObject.GetComponentInParent<PlayerMovement>().Balldribling;
@@ -76,7 +70,6 @@ public class BallBounce : MonoBehaviour
             pushDirection.Normalize();
             _rb.AddForce(pushDirection * _pushForce, ForceMode.VelocityChange);
         }
-
         if (collision.gameObject.CompareTag("EnemyKick"))
         {
             _ballAudio.Play();

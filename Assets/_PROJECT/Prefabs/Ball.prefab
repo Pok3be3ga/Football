@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 670066019363570402}
   - component: {fileID: 7987626695929494535}
   - component: {fileID: 866866159326287773}
+  - component: {fileID: 5185749554980370960}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Ball
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.61, y: 27.83, z: -30.15}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4740545753506250420}
@@ -85,10 +86,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628b4f873b8069c45a5d4372f0529d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 18
-  _maxSpeed: 15
+  _pushForce: 21
+  _maxSpeed: 17
   _randomPositionRespawn: 1
-  _coefPushForse: 0.1
   _distanceDribling: 0.5
   _playerGate: {fileID: 0}
   _enemyGate: {fileID: 0}
@@ -192,6 +192,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5185749554980370960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991294371128695405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e659cdcd1730e243a7f16b1f8415123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _balls:
+  - {fileID: 5368886225485276174}
+  - {fileID: 5984632155178628848}
+  - {fileID: 4902075824444291207}
+  _gameSettings: {fileID: 11400000, guid: 83e85bd5d96812a468b094b187efd945, type: 2}
 --- !u!1001 &5063018234815748447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,7 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eaf91f38db66fc6439ff7704ed985e6c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eaf91f38db66fc6439ff7704ed985e6c, type: 3}
       propertyPath: m_TagString
