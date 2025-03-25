@@ -108,12 +108,6 @@ public class EnemyMovement : MonoBehaviour
             _rigidbody.MoveRotation(newRotation);
         }
     }
-    //private void Jump()
-    //{
-    //    _animator.SetTrigger("Jump");
-    //    //_rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
-    //}
-
     public void LevelSettings(Settings settings)
     {
         if (settings == Settings.Easy)

@@ -27,4 +27,11 @@ public class EnemyKick : MonoBehaviour
             }
         }
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            _timer = 0f;
+        }
+    }
 }

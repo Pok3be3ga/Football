@@ -29,17 +29,19 @@ public class MainMenuManager : MonoBehaviour
     private void OnEnable()
     {
         YandexGame.GetDataEvent += GetLoad;
+        YandexGame.RewardVideoEvent += Rewarded;
     }
     private void OnDisable()
     {
         YandexGame.GetDataEvent -= GetLoad;
+        YandexGame.RewardVideoEvent -= Rewarded;
     }
     public void GetLoad()
     {
         LoadBuysFromJSON();
         _gameSettings.Money = YandexGame.savesData.Money;
     }
-    
+
     private void FixedUpdate()
     {
         UpdateDisplay();
@@ -116,9 +118,11 @@ public class MainMenuManager : MonoBehaviour
     private void ADV()
     {
         YandexGame.RewVideoShow(0);
-       
-        _gameSettings.Money += 500;
         UpdateDisplay();
+    }
+    void Rewarded(int id)
+    {
+        if(id == 0) _gameSettings.Money += 500;
     }
     #region Save
 
@@ -161,7 +165,7 @@ public class MainMenuManager : MonoBehaviour
     public void LoadBuysFromJSON()
     {
 
-        if(YandexGame.savesData.Eyewear.Count != 0)
+        if (YandexGame.savesData.Eyewear.Count != 0)
         {
             _gameSettings.SaveGlovesFirstPlayer = YandexGame.savesData.CharacterPartsFirst;
             _gameSettings.Hair = YandexGame.savesData.Hair;

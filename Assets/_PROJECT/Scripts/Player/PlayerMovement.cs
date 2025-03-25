@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode moveDownKey = KeyCode.S;
     public KeyCode moveLeftKey = KeyCode.A;
     public KeyCode moveRightKey = KeyCode.D;
-    public KeyCode jumpKey = KeyCode.Space;
+    //public KeyCode jumpKey = KeyCode.Space;
     public KeyCode KickKey = KeyCode.LeftShift;
 
     private Vector3 _movementInput;
@@ -43,13 +43,13 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody.AddForce(Vector3.down * Physics.gravity.y * _gravity, ForceMode.Impulse);
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(jumpKey) && _isGrounded)
-        {
-            Jump();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(jumpKey) && _isGrounded)
+    //    {
+    //        Jump();
+    //    }
+    //}
     private void HandleMovement()
     {
         if(_staticState == false)
@@ -80,11 +80,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Jump()
-    {
-        Animator.SetTrigger("Jump");
-        _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
-    }
+    //private void Jump()
+    //{
+    //    Animator.SetTrigger("Jump");
+    //    _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
+    //}
 
     private void OnCollisionStay(Collision collision)
     {
