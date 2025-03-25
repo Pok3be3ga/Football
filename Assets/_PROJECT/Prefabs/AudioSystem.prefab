@@ -523,10 +523,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b215bf20c7a24e9b0791fd41d467f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24300002, guid: 335716e6e5b894846b209d3a6a92e5c0, type: 2}
-  toggle: {fileID: 1845206476948418592}
-  slider: {fileID: 4607393517534356908}
-  gameSettings: {fileID: 11400000, guid: 83e85bd5d96812a468b094b187efd945, type: 2}
+  _audioMixer: {fileID: 24300002, guid: 335716e6e5b894846b209d3a6a92e5c0, type: 2}
+  _toggle: {fileID: 1845206476948418592}
+  _slider: {fileID: 4607393517534356908}
+  _gameSettings: {fileID: 11400000, guid: 83e85bd5d96812a468b094b187efd945, type: 2}
 --- !u!1 &6423856333418616563
 GameObject:
   m_ObjectHideFlags: 0

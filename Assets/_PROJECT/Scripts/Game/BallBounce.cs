@@ -61,12 +61,11 @@ public class BallBounce : MonoBehaviour
         {
             _ballAudio.Play();
             _ballDriblingTransform = null;
-            ContactPoint contact = collision.contacts[0];
-            Vector3 pushDirection = collision.transform.forward;
-                //+ new Vector3(
-                //Random.Range(-_randomValuePlayer, _randomValuePlayer),
-                //Random.Range(-_randomValuePlayer, _randomValuePlayer),
-                //Random.Range(-_randomValuePlayer, _randomValuePlayer)) - transform.position;
+            Vector3 pushDirection = _enemyGate.position
+            + new Vector3(
+            Random.Range(-_randomValuePlayer, _randomValuePlayer),
+            Random.Range(-_randomValuePlayer, _randomValuePlayer),
+            Random.Range(-_randomValuePlayer, _randomValuePlayer)) - transform.position;
             pushDirection.Normalize();
             _rb.AddForce(pushDirection * _pushForce, ForceMode.VelocityChange);
         }
@@ -74,13 +73,16 @@ public class BallBounce : MonoBehaviour
         {
             _ballAudio.Play();
             _ballDriblingTransform = null;
-            ContactPoint contact = collision.contacts[0];
             Vector3 pushDirection = _playerGate.position + new Vector3(
                 Random.Range(-_randomValueEnemy, _randomValueEnemy),
                 Random.Range(-_randomValueEnemy, _randomValueEnemy),
                 Random.Range(-_randomValueEnemy, _randomValueEnemy)) - transform.position;
             pushDirection.Normalize();
             _rb.AddForce(pushDirection * _pushForce, ForceMode.VelocityChange);
+        }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            _rb.AddForce(collision.contacts[0].point * _pushForce / 8f, ForceMode.VelocityChange);
         }
     }
     public void RespawnBall()

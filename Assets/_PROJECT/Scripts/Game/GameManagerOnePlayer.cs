@@ -131,7 +131,6 @@ public class GameManagerOnePlayer : MonoBehaviour
     private void UpdateDisplay()
     {
         _startText.gameObject.SetActive(true);
-        _startText.text = "GOAL";
         _pointText.text = _playerPoint.ToString() + ":" + _enemyPoint.ToString();
     }
     private void SettingsSetup()
