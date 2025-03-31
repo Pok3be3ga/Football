@@ -343,6 +343,7 @@ MonoBehaviour:
   buttons:
   - {fileID: 314528299}
   - {fileID: 706454627}
+  _gameSettings: {fileID: 11400000, guid: 83e85bd5d96812a468b094b187efd945, type: 2}
 --- !u!1 &16615219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3900,15 +3901,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859924946508273746, guid: 9b03def1e3b9b464b99ac6b8714a85f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.73
+      value: -2.35
       objectReference: {fileID: 0}
     - target: {fileID: 1859924946508273746, guid: 9b03def1e3b9b464b99ac6b8714a85f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.012
+      value: -5.35
       objectReference: {fileID: 0}
     - target: {fileID: 1859924946508273746, guid: 9b03def1e3b9b464b99ac6b8714a85f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.06
+      value: 5.45
       objectReference: {fileID: 0}
     - target: {fileID: 1859924946508273746, guid: 9b03def1e3b9b464b99ac6b8714a85f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4580,6 +4581,7 @@ MonoBehaviour:
   - {fileID: 1502734742}
   _buttons: {fileID: 167341499}
   _gameSettings: {fileID: 11400000, guid: 83e85bd5d96812a468b094b187efd945, type: 2}
+  _ViewportSecondPalyer: {fileID: 1567481771}
 --- !u!1 &1242317143
 GameObject:
   m_ObjectHideFlags: 0
@@ -9861,6 +9863,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1414088886111074565, guid: 46a2eab907520914dbb8bc5d99e7122b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602876843119315180, guid: 46a2eab907520914dbb8bc5d99e7122b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5894789611166729056, guid: 46a2eab907520914dbb8bc5d99e7122b, type: 3}

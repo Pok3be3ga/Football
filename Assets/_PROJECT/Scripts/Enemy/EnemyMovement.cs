@@ -13,20 +13,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private GameObject _kickHead;
     [SerializeField] private GameObject _kickFoot;
 
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
     private bool _dribling = true;
     //private float _timer = 0f;
     private bool _isGrounded;
     private bool _staticState = true;
     void Start()
     {
-
-        _rigidbody = GetComponent<Rigidbody>();
-        if (_rigidbody == null)
-        {
-            Debug.LogError("Rigidbody component not found on this GameObject.");
-        }
-        _rigidbody.maxLinearVelocity = 8f;
         StateGame();
     }
     void FixedUpdate()
@@ -112,18 +105,19 @@ public class EnemyMovement : MonoBehaviour
     {
         if (settings == Settings.Easy)
         {
-            moveSpeed = 6f;
+            moveSpeed = 4f;
             _kickHead.SetActive(false);
         }
         else if (settings == Settings.Normal)
         {
-            moveSpeed = 6.5f;
+            moveSpeed = 4.5f;
         }
         else if (settings == Settings.Hard)
         {
-            moveSpeed = 7f;
+            moveSpeed = 5f;
             _kickHead.SetActive(true);
         }
+        _rigidbody.maxLinearVelocity = moveSpeed;
     }
     public void KickAnimation()
     {

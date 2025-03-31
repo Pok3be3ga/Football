@@ -16,7 +16,7 @@ public class BallBounce : MonoBehaviour
     [SerializeField] private AudioSource _ballAudio;
     [SerializeField] private AudioClip _ballAudioClip;
 
-    private Rigidbody _rb;
+    [SerializeField] private Rigidbody _rb;
     private Transform _ballDriblingTransform;
     private float _randomValuePlayer = 0f;
     private float _randomValueEnemy = 0f;
@@ -98,17 +98,17 @@ public class BallBounce : MonoBehaviour
     {
         if (settings == Settings.Easy)
         {
-            _randomValueEnemy = 5f;
+            _randomValueEnemy = 8f;
             _randomValuePlayer = 0f;
         }
         else if (settings == Settings.Normal)
         {
-            _randomValueEnemy = 3f;
+            _randomValueEnemy = 5f;
             _randomValuePlayer = 2f;
         }
         else if (settings == Settings.Hard)
         {
-            _randomValueEnemy = 1f;
+            _randomValueEnemy = 3f;
             _randomValuePlayer = 1f;
         }
         else if (settings == Settings.Empty)

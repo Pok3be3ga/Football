@@ -10,7 +10,7 @@ public class DifficultyLevel : MonoBehaviour
     [SerializeField] private Button[] _levelButtons;
     [SerializeField] private GameObject _buttons;
     [SerializeField] private GameSettings _gameSettings;
-
+    [SerializeField] private GameObject _ViewportSecondPalyer;
     private void Start()
     {
         _mainButton.onClick.AddListener(Active);
@@ -34,10 +34,6 @@ public class DifficultyLevel : MonoBehaviour
     }
     private void OnDisable()
     {
-        _gameSettings.GameSettingOnePlayer = Settings.Empty;
-    }
-    private void OnEnable()
-    {
-        _gameSettings.GameSettingOnePlayer = Settings.Easy;
+        if (_ViewportSecondPalyer.activeSelf == true) _gameSettings.GameSettingOnePlayer = Settings.Empty;
     }
 }
