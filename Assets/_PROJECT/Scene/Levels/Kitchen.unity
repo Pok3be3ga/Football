@@ -4755,6 +4755,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 476480381795487428, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 479122728628002962, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4827,9 +4831,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2348444264835270359, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512104648747461048, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2683621665046312062, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021781724707501140, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066606881007334640, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3326699559243373671, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
@@ -4843,9 +4863,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4299832385075025546, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4370948344154437555, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439364262229060512, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 4557699952886244847, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
@@ -4867,6 +4895,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6027546309154460493, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 6208005955125381562, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4883,6 +4915,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7248243271231492179, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7257578740161615497, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4890,6 +4926,10 @@ PrefabInstance:
     - target: {fileID: 7418929091041832739, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515202531300953625, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8392213198678410487, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
@@ -4914,6 +4954,10 @@ PrefabInstance:
     - target: {fileID: 8714507345075044984, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847046180885869022, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9084017416636592942, guid: 9f00dc305b0e017479fe7980dd6d6f83, type: 3}
       propertyPath: m_Enabled

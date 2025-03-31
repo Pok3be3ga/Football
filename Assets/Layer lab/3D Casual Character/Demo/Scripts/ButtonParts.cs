@@ -33,8 +33,8 @@ namespace Layer_lab._3D_Casual_Character
             _parts = parts;
             SetParts(index);
         }
-
-        private void SetParts()
+        [ContextMenu("ResetParts")]
+        public void SetParts()
         {
             if (IsEmpty)
             {
